@@ -1,0 +1,72 @@
+.products-table{
+    background-color: rgba(248, 248, 248, 1);
+    
+    .search_and_add{
+
+        .search{
+            width: 377px;
+            height: 64px;
+            border-radius: 30px;
+            background-color: white;
+
+            .input{
+                width: 250px;
+                height: 60px;
+                font-size: 20px;
+                color: black;
+                margin-left: 34px;
+
+                ::placeholder{
+                    color: rgb(188, 188, 188)
+                }
+            }
+
+            .icon{
+                width: 79px;
+                height: 42px;
+                border-color: #E6E6E6;
+                padding: 8px 30px;
+            }
+        }
+
+        .add{
+            width: 222px;
+            height: 64px;
+            border-radius: 30px;
+            background-color: rgba(0, 147, 152, 1);
+        }
+    }
+
+    .table{
+        .product-type{
+            .type{
+                width: 200px;
+                color: rgba(166, 166, 166, 1);
+
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 1px;
+                    border-bottom: 3px;
+                    border-style: solid;
+                    border-color: transparent;
+                    position: relative;
+                    top: 8px;
+                    transition: 1s;
+                    left: 100px;
+                }
+            }
+            .active{
+                color: rgba(0, 147, 152, 1);
+                cursor: auto;
+
+                &::after{
+                    width: 200px;  
+                    border-color: rgba(0, 147, 152, 1);
+                    left: 0;
+                } 
+            } 
+        }
+    }
+}
