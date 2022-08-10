@@ -1,0 +1,64 @@
+.mean-section{
+    .bar{
+        .logo{
+            color: #009398;
+        }
+
+        ul{
+            color: #B4B4C6;
+
+            & > a{
+                &:hover{
+                    color: #6bbfc2;
+                }
+            }
+
+            .active{
+                color: #009398;
+
+                &:hover{
+                    cursor: auto;
+                    color: #009398;
+                }
+            }
+        }
+    }
+
+    .mean{
+        background-color: rgba(248, 248, 248, 1);
+        width: calc(100% - 288px);
+
+        .line{
+
+            div{
+                color: #A6A6A6;
+
+
+                &:hover{
+                    color: #6bbfc2;
+                }
+            }
+           
+        }
+        .admin{
+            &:hover{
+                color: #6bbfc2;
+                svg{
+                    path{
+                        stroke:#6bbfc2 !important;
+                    }
+                }
+            }
+        }
+
+        .line{
+
+            &::after{
+                display: block;
+                background-color: #cccccc;
+                padding-top: 1px;
+            }
+           
+        }
+    }
+}
