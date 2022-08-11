@@ -40,8 +40,9 @@
     .table{
         .product-type{
             .type{
-                width: 200px;
+                min-width: 150px;
                 color: rgba(166, 166, 166, 1);
+                transition: 0.4s;
 
                 &::after{
                     content: "";
@@ -53,7 +54,7 @@
                     border-color: transparent;
                     position: relative;
                     top: 8px;
-                    transition: 0.4s;
+                    transition: 0.5s;
                     left: 100px;
                 }
             }
@@ -62,7 +63,7 @@
                 cursor: auto;
 
                 &::after{
-                    width: 200px;  
+                    width: 100%;  
                     border-color: rgba(0, 147, 152, 1);
                     left: 0;
                 } 

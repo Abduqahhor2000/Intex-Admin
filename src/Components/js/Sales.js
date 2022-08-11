@@ -1,8 +1,6 @@
-import { products } from "../../JSON/products"
-
-export default function ProductsTable({category}) {
-    return (
-        <div>
+export default function Sales () {
+    return(
+        <>
             <table className="w-full">
                 <thead className="text-xl bg-white text-left ">
                     <th className="py-5 rounded-l-3xl pl-11">Изображение</th>
@@ -57,6 +55,6 @@ export default function ProductsTable({category}) {
                     
                 </tbody>
             </table>
-        </div>
+        </>
     )
 }
