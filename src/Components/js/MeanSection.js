@@ -7,7 +7,7 @@ export default function MeanSection() {
     return(
         <>
             <div className="mean-section flex">
-                <div className="bar w-72 h-screen bg-white pl-10">
+                <div className="bar w-72 h-screen bg-white pl-10 fixed">
                     <div className="logo text-2xl py-8 mb-9 font-semibold"><a href="https://intex-market.uz">INTEX-MARKET.UZ</a></div>
                     <ul className="flex flex-col">
                         <Link to="/products" className={`mb-4 text-2xl cursor-pointer ${pathname === "/products" ? "active" : "" }`}>Продукты</Link>
@@ -16,8 +16,8 @@ export default function MeanSection() {
                         <Link to="/site" className={`mb-4 text-2xl cursor-pointer ${pathname === "/site" ? "active" : "" }`}>Сайт</Link>
                     </ul>    
                 </div>
-                <div className="mean w-5/6 h-screen">
-                    <div className="line flex items-center text-2xl justify-end w-full px-11 h-24 after:content-[''] after:w-screen after:bottom-0 after:right-0 after:absolute after:bg-pink-500 relative">
+                <div className="mean w-5/6 h-screen ml-72 pt-24">
+                    <div className="line fixed flex items-center text-2xl justify-end w-full px-11 top-0 right-0 h-24 after:content-[''] after:w-screen after:bottom-0 after:right-0 after:absolute after:bg-pink-500">
                         <div className="cursor-pointer"><a href="https://intex-market.uz">Просмотр веб-сайта</a></div>
                         <div className="mx-7">
                             <svg xmlns="http://www.w3.org/2000/svg" width="3" height="15" viewBox="0 0 3 15" fill="none">

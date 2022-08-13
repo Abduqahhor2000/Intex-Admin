@@ -3,16 +3,16 @@ const inputIcon = <svg xmlns="http://www.w3.org/2000/svg" width="32" height="29"
                   </svg>
 
 
-export default function CategorySectionMadal({categoryMadal, setCategoryMadal, categoryInfo, setCategoryInfo}) {
-    if(!categoryMadal){
+export default function OrderMadal({orderMadal, setOrderMadal, orderInfo, setOrderInfo}) {
+    if(!orderMadal){
         return;
     }
 
     return(
         <>
-            <div onClick={()=> setCategoryMadal(false)} className="absolute top-0 left-0 w-screen h-screen" style={{"background-color": "rgba(0, 0, 0, 0.2)", "backdrop-filter": "blur(7px)"}}></div>
+            <div onClick={()=> setOrderMadal(false)} className="absolute top-0 left-0 w-screen h-screen" style={{"background-color": "rgba(0, 0, 0, 0.2)", "backdrop-filter": "blur(7px)"}}></div>
             <div className="absolute flex flex-col justify-between items-center w-2/3 h-96 bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 bg-slate-100 p-12 pt-6 rounded-3xl">
-                <span onClick={() => setCategoryMadal(false)} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
+                <span onClick={() => setOrderMadal(false)} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 -0.685636 0.727944 0.685636 0.00292969 28.5811)" fill="#B9B9B9"/>
@@ -21,19 +21,15 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, c
                 {
                     categoryMadal === true ? 
                         <>
-                            <h2 className="text-5xl" style={{"color": "#009398"}}>Добавить категории</h2>
-                            <div className="w-full flex justify-around">
-                                <label className="relative text-xl w-96 text-gray-500 pb-5">Название<br/>
-                                    <input defaultValue={categoryInfo.name} className="text-black outline-none w-full h-9 mt-2.5 border-b-2 border-slate-400 px-3" type="tel"/>     
-                                    <span className="absolute block right-full bottom-4 mr-2">{inputIcon}</span>  
-                                </label>
-                                <label className="relative text-xl w-96 text-gray-500 pb-5">На узбекском<br/>
-                                    <input defaultValue={categoryInfo.name_uz} className="text-black outline-none w-full h-9 mt-2.5 border-b-2 border-slate-400 px-3" type="tel"/>     
-                                    <span className="absolute block right-full bottom-4 mr-2">{inputIcon}</span>  
-                                </label>
+                            <h2 className="text-5xl" style={{"color": "#009398"}}>Действия</h2>
+                            <div className="w-full flex justify-center">
+                                <span>Siz rostdan ham shu bo'limning statusini o'zgartirmoqchimisiz!!!</span>
                             </div>
-                            <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Изменить</span>                
-                        </> : 
+                            <div className="flex justify-around w-full">
+                                <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Da</span>
+                                <span onClick={()=> setOrderMadal(false)} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgb(152, 0, 147)"}}>Net</span>   
+                            </div>
+                                </> : 
                         <>
                             <h2 className="text-5xl" style={{"color": "#009398"}}>Действия</h2>
                             <div className="w-full flex justify-center">
@@ -41,7 +37,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, c
                             </div>
                             <div className="flex justify-around w-full">
                                 <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Da</span>
-                                <span onClick={()=> setCategoryMadal(false)} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgb(152, 0, 147)"}}>Net</span>   
+                                <span onClick={()=> setOrderMadal(false)} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgb(152, 0, 147)"}}>Net</span>   
                             </div>
                         </>
                 }

@@ -1,42 +1,45 @@
+import {products} from "../../JSON/products"
+
 export default function Sales () {
     return(
         <>
             <table className="w-full">
                 <thead className="text-xl bg-white text-left ">
-                    <th className="py-5 rounded-l-3xl pl-11">Изображение</th>
+                    <th className="py-5 rounded-l-3xl pl-11">Имя клиента</th>
+                    <th className="py-5">Телефон</th>
+                    <th className="py-5">Изображение</th>
+                    <th className="py-5">Размер(м)/ <br/>Глубина(см)</th>
                     <th className="py-5">Цена(сум)</th>
-                    <th className="py-5">Количество</th>
-                    <th className="py-5">Рамка</th>
-                    <th className="py-5">Размер(м)</th>
-                    <th className="py-5">Глубина(см)</th>
+                    <th className="py-5">Адрес</th>
+                    <th className="py-5">Время</th>
                     <th className="py-5 rounded-r-3xl">Действия</th>
                 </thead>
                 <div className="mt-5"></div>
                 <tbody>
                     {
                         products.map(item => {
-                            if(item.category !== category){
+                            if(item.category !== "carcas"){
                                 return null;
                             }
                             return (
                                 <>
-                                    <tr className="bg-white">
-                                        <td className="rounded-l-3xl py-2.5">
-                                            <img src={item.imgUrl} alt="" className="h-12 ml-10"></img>
+                                    <tr className="bg-white text-xl">
+                                        <td className="rounded-l-3xl py-1.5 pl-10">{item.comer}</td>
+                                        <td className="py-1.5">{item.telNumber}</td>
+                                        <td className=" py-2.5">
+                                            <img src={item.imgUrl} alt="" className="h-12"></img>
                                         </td>
-                                        <td className="py-2 flex flex-col justify-center">
-                                            <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{item.oldCost} сум</span>
-                                            <span className="text-base font-bold">{item.newCost} сум</span>
+                                        <td className="py-1.5">{item.size}/{item.height}</td>
+                                        <td className="py-1.5">{item.newCost}</td>
+                                        <td className="py-1.5">
+                                            <span className="w-48 block">{item.address}</span>
                                         </td>
-                                        <td className="py-1.5">{item.level}</td>
-                                        <td className="py-1.5">{item.border}</td>
-                                        <td className="py-1.5">{item.size}</td>
-                                        <td className="py-1.5">{item.height}</td>
+                                        <td className="py-1.5">{item.data}</td>
                                         <td className="py-1.5 rounded-r-3xl">
                                             <div className="flex">
                                                 <span className="p-2 cursor-pointer">
-                                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M0.750122 13.8125V17.2499H4.18752L14.3255 7.11191L10.8881 3.67234L0.750122 13.8125ZM16.9847 4.45268C17.0697 4.36793 17.1372 4.26722 17.1832 4.15635C17.2292 4.04547 17.2529 3.9266 17.2529 3.80655C17.2529 3.6865 17.2292 3.56763 17.1832 3.45675C17.1372 3.34588 17.0697 3.24517 16.9847 3.16041L14.8396 1.01529C14.7548 0.930268 14.6541 0.862814 14.5432 0.816788C14.4323 0.770762 14.3135 0.74707 14.1934 0.74707C14.0734 0.74707 13.9545 0.770762 13.8436 0.816788C13.7328 0.862814 13.632 0.930268 13.5473 1.01529L11.8697 2.69827L15.3071 6.13026L16.9847 4.45268Z" fill="#3F8C8E"/>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">
+                                                        <path d="M9.5 0C7.62108 0 5.78435 0.557165 4.22209 1.60104C2.65982 2.64491 1.44218 4.12861 0.723149 5.86451C0.0041162 7.6004 -0.184015 9.51054 0.182544 11.3534C0.549104 13.1962 1.45389 14.8889 2.78249 16.2175C4.11109 17.5461 5.80383 18.4509 7.64665 18.8175C9.48946 19.184 11.3996 18.9959 13.1355 18.2769C14.8714 17.5578 16.3551 16.3402 17.399 14.7779C18.4428 13.2156 19 11.3789 19 9.5C19 8.25244 18.7543 7.0171 18.2769 5.86451C17.7994 4.71191 17.0997 3.66464 16.2175 2.78249C15.3354 1.90033 14.2881 1.20056 13.1355 0.723144C11.9829 0.245725 10.7476 0 9.5 0ZM13.585 7.2295L9.2435 12.9295C9.155 13.0445 9.04135 13.1376 8.91125 13.2019C8.78116 13.2661 8.63808 13.2996 8.493 13.3C8.3487 13.3008 8.20613 13.2687 8.07609 13.2061C7.94605 13.1436 7.83197 13.0522 7.7425 12.939L5.4245 9.9845C5.34778 9.88594 5.29122 9.77324 5.25805 9.65282C5.22488 9.5324 5.21575 9.40663 5.23119 9.28269C5.24663 9.15875 5.28633 9.03906 5.34802 8.93046C5.40972 8.82186 5.4922 8.72647 5.59075 8.64975C5.7898 8.49479 6.04225 8.42526 6.29256 8.45644C6.4165 8.47188 6.53619 8.51157 6.64479 8.57327C6.75339 8.63496 6.84878 8.71744 6.9255 8.816L8.474 10.792L12.065 6.042C12.1411 5.94219 12.2361 5.85836 12.3446 5.79527C12.4531 5.73219 12.573 5.69109 12.6974 5.67433C12.8218 5.65757 12.9482 5.66547 13.0696 5.69759C13.1909 5.7297 13.3047 5.7854 13.4045 5.8615C13.5043 5.9376 13.5881 6.03261 13.6512 6.14112C13.7143 6.24962 13.7554 6.36948 13.7722 6.49387C13.7889 6.61825 13.781 6.74472 13.7489 6.86605C13.7168 6.98738 13.6611 7.10119 13.585 7.201V7.2295Z" fill="#139D4B"/>
                                                     </svg>
                                                 </span>
                                                 <span className="p-2 ml-2 cursor-pointer">
