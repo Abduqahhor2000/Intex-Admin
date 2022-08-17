@@ -8,7 +8,7 @@ export default function Orders() {
         <>
             <div className="products-table min-h-screen px-10 py-6">
                 <div className="search_and_add flex justify-between">
-                    <div className="search flex shadow-lg items-center justify-start">
+                    <div className="search flex shadow-lg items-center justify-between">
                         <input className="input border-none outline-none pb-0.5 leading-6" placeholder="Найти"/>
                         <span className="icon block border-solid border-l-2">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">

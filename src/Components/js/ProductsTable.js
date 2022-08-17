@@ -1,6 +1,55 @@
-import { products } from "../../JSON/products"
+import { useSelector } from "react-redux"
+import axios from "axios"
+import { Triangle  } from  'react-loader-spinner'
+import { useEffect, useState } from "react"
 
-export default function ProductsTable({category}) {
+export default function ProductsTable({category_id}) {
+    const token = useSelector(state => state.user.user.token)
+    const [isLoading, setIsLoading] = useState(true)
+    const [products, setProducts] = useState([])
+    const [oneHand, setOneHand] = useState(false)
+
+    const getProducts = async () => {
+        if(!oneHand){
+            setIsLoading(true)
+        }
+        try{
+            const data = await axios({
+                method: 'get',
+                url: `https://market-index.herokuapp.com/api/product/category/${category_id}`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            setProducts(data?.data?.data)
+            setIsLoading(false)
+            setOneHand(true)
+            console.log(data.data)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    if(isLoading){
+        return(
+            <div style={{"width": "300px"}} className="mx-auto mt-40" >
+                <Triangle 
+                    height = "300"
+                    width = "300"
+                    radius = "9"
+                    color = '#009398'
+                    ariaLabel = 'three-dots-loading'     
+                    wrapperStyle
+                    wrapperClass
+                />
+            </div>
+        )
+    }
+
     return (
         <div>
             <table className="w-full">
@@ -17,23 +66,20 @@ export default function ProductsTable({category}) {
                 <tbody>
                     {
                         products.map(item => {
-                            if(item.category !== category){
-                                return null;
-                            }
                             return (
                                 <>
                                     <tr className="bg-white">
                                         <td className="rounded-l-3xl py-2.5">
-                                            <img src={item.imgUrl} alt="" className="h-12 ml-10"></img>
+                                            <img src={item.image} alt="" className="h-12 ml-10"></img>
                                         </td>
                                         <td className="py-2 flex flex-col justify-center">
-                                            <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{item.oldCost} сум</span>
-                                            <span className="text-base font-bold">{item.newCost} сум</span>
+                                            <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{item.price} сум</span>
+                                            <span className="text-base font-bold">{item.sale_price} сум</span>
                                         </td>
-                                        <td className="py-1.5">{item.level}</td>
-                                        <td className="py-1.5">{item.border}</td>
+                                        <td className="py-1.5">{item.quantity}</td>
+                                        <td className="py-1.5">{item.category_name_ru}</td>
                                         <td className="py-1.5">{item.size}</td>
-                                        <td className="py-1.5">{item.height}</td>
+                                        <td className="py-1.5">{item.depth}</td>
                                         <td className="py-1.5 rounded-r-3xl">
                                             <div className="flex">
                                                 <span className="p-2 cursor-pointer">
@@ -49,7 +95,7 @@ export default function ProductsTable({category}) {
                                             </div>   
                                         </td>
                                     </tr>
-                                <div className="mt-2"></div>
+                                    <div className="mt-2"></div>
                                 </>
                             )
                         })

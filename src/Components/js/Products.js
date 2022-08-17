@@ -1,10 +1,61 @@
 import "../scss/ProductsTable.scss"
-import { category } from "../../JSON/category";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductsTable from "./ProductsTable"
+import axios from "axios"
+import { Triangle  } from  'react-loader-spinner'
+import { useSelector } from "react-redux";
 
 export default function Products() {
-    const [categoryName, setCategoryName] = useState("carcas");
+    const token = useSelector(state => state.user.user.token)
+    const [category_id, setCategory_id] = useState("");
+    const [isLoading, setIsLoading] = useState(true)
+    const [categories, setCategories] = useState([])
+    const [oneHand, setOneHand] = useState(false)
+
+    const getCategories = async () => {
+        try{
+            if(!oneHand){
+                setIsLoading(true)
+            }
+            const {data} = await axios({
+                method: 'get',
+                url: `https://market-index.herokuapp.com/api/category`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            if(category_id === ""){
+                setCategory_id(data.data[0].category_id)
+            }
+            setCategories(data.data)
+            setIsLoading(false)
+            setOneHand(true)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    useEffect(()=>{
+        getCategories()
+    }, [])
+
+
+
+    if(isLoading){
+        return(
+            <div style={{"width": "300px"}} className="mx-auto mt-40" >
+                <Triangle 
+                    height = "300"
+                    width = "300"
+                    radius = "9"
+                    color = '#009398'
+                    ariaLabel = 'three-dots-loading'     
+                    wrapperStyle
+                    wrapperClass
+                />
+            </div>
+        )
+    }
 
     return (
         <>
@@ -26,20 +77,29 @@ export default function Products() {
                 <div className="table w-full pt-3">
                     <div className="product-type flex justify-center items-center mb-10">
                         {
-                            category.map(item => {
+                            categories.map(item => {
                                 return(
                                     <>
-                                        <span className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${categoryName === item.type ? "active" : ""}`}
-                                            onClick={() => setCategoryName(item.type)}
+                                        <span className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${category_id === item.category_id ? "active" : ""}`}
+                                            onClick={() => setCategory_id(item.category_id)}
                                         >
-                                            {item.name}
+                                            {item.name_ru}
                                         </span>
                                     </>
                                 )
                             })
                         }
                     </div>
-                    <ProductsTable category={categoryName}/>
+                    {
+                        categories.map(item => {
+                            return(
+                                <>
+                                    {item.category_id === category_id ? <ProductsTable category_id={category_id}/> : null}
+                                </>
+                            )
+                        })
+                    }
+                    
                 </div>
             </div>
         </>
