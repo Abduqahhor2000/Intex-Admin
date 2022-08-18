@@ -3,8 +3,8 @@ import girlvsboy from "../../img/girlvsboy.jpg"
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom"
 import { addUser, removeUser } from "../../redux/userReducer";
-import axios from "axios";
 import { useState, useEffect } from "react";
+import { https } from "../../axios";
 
 export default function Login() {
     const [dateRandom] = useState((new Date().getMilliseconds() % 2) === 0 ? true : false)
@@ -23,7 +23,7 @@ export default function Login() {
 
     const getLogin = async () => {
         try{
-            const {data} = await axios.post("https://market-index.herokuapp.com/auth/login",
+            const {data} = await https.post("/auth/login",
                 {
                     "username": userName,
                     "password": password,

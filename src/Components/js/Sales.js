@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
-import axios from "axios"
 import { useEffect, useState } from "react"
 import SalesMadal from "./madals/SalesMadal"
 import { Triangle  } from  'react-loader-spinner'
+import { https } from "../../axios"
 
 export default function Sales () {
     const token = useSelector(state => state.user.user.token)
@@ -17,9 +17,9 @@ export default function Sales () {
             setIsLoading(true)
         }
         try{
-            const {data} = await axios({
+            const {data} = await https({
                 method: 'get',
-                url: `https://market-index.herokuapp.com/api/order`,
+                url: `/api/order`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
@@ -35,9 +35,9 @@ export default function Sales () {
 
     const updateSales = async (id) => {
         try{
-            const data = await axios({
+            const data = await https({
                 method: 'put',
-                url: `https://market-index.herokuapp.com/api/order/${id}`,
+                url: `/api/order/${id}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },

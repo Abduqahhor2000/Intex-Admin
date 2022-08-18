@@ -1,6 +1,6 @@
-import axios from "axios"
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 
 export default function ConsultationMadal({setConsulMadal, consulID}) {
@@ -15,9 +15,9 @@ export default function ConsultationMadal({setConsulMadal, consulID}) {
     const deleteConsul = async () => {
         try{
             setReqStatus(true)
-            const data = await axios({
+            const data = await https({
                 method: 'delete',
-                url: `https://market-index.herokuapp.com/api/consultation/${consulID}`,
+                url: `/api/consultation/${consulID}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },

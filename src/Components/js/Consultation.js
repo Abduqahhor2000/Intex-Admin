@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ConsultationMadal from "./madals/ConsultationMadal";
 import { Triangle  } from  'react-loader-spinner'
+import { https } from "../../axios";
 
 
 export default function Consultation () {
@@ -18,9 +18,9 @@ export default function Consultation () {
             setIsLoading(true)
         }
         try{
-            const {data} = await axios({
+            const {data} = await https({
                 method: 'get',
-                url: `https://market-index.herokuapp.com/api/consultation`,
+                url: `/api/consultation`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
@@ -36,9 +36,9 @@ export default function Consultation () {
 
     const updateConsul = async (id) => {
         try{
-            const data = await axios({
+            const data = await https({
                 method: 'put',
-                url: `https://market-index.herokuapp.com/api/consultation/${id}`,
+                url: `/api/consultation/${id}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },

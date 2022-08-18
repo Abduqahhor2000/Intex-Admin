@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import CategorySectionMadal from "./madals/CategorySectionMadal";
 import { useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
+import { https } from "../../axios";
 
 export default function Category() {
     const [categoryMadal, setCategoryMadal] = useState(false);
@@ -19,9 +19,8 @@ export default function Category() {
             if(!oneHand){
                 setIsLoading(true)
             }
-            const {data} = await axios.get("/category", 
+            const {data} = await https.get("/api/category", 
                 {
-                    baseURL: "https://market-index.herokuapp.com/api/",
                     headers:{
                         Authorization: `Bearer ${user.token}`,
                     },

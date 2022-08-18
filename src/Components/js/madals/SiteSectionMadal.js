@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { https } from "../../../axios";
 import gr from "../../../img/Gr.png"
 
 const inputIcon = <svg xmlns="http://www.w3.org/2000/svg" width="32" height="29" viewBox="0 0 32 29" fill="none">
@@ -27,7 +27,7 @@ export default function SiteSectionMadal({typeMadal, setTypeMadal, typeInfo}) {
     const updateSiteInfo = async () => {
         try{   
             setStatusReq("active") 
-            const datan = await axios({
+            const datan = await https({
                 method: 'put',
                 url: `https://market-index.herokuapp.com/api/site/${typeMadal}`,
                 headers:{

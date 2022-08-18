@@ -1,9 +1,9 @@
 import "../scss/ProductsTable.scss"
 import { useEffect, useState } from "react";
 import ProductsTable from "./ProductsTable"
-import axios from "axios"
 import { Triangle  } from  'react-loader-spinner'
 import { useSelector } from "react-redux";
+import { https } from "../../axios";
 
 export default function Products() {
     const token = useSelector(state => state.user.user.token)
@@ -17,9 +17,9 @@ export default function Products() {
             if(!oneHand){
                 setIsLoading(true)
             }
-            const {data} = await axios({
+            const {data} = await https({
                 method: 'get',
-                url: `https://market-index.herokuapp.com/api/category`,
+                url: `/api/category`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },

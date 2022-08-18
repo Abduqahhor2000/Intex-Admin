@@ -1,9 +1,9 @@
 import { useState } from "react";
 import SiteSectionMadal from "./madals/SiteSectionMadal"
 import { useEffect } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
+import { https } from "../../axios";
 
 export default function Orders() {
     const token = useSelector(state => state.user.user.token)
@@ -18,9 +18,9 @@ export default function Orders() {
             if(!oneHand){
                 setIsLoading(true)
             }
-            const {data} = await axios({
+            const {data} = await https({
                 method: 'get',
-                url: `https://market-index.herokuapp.com/api/site`,
+                url: `/api/site`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
