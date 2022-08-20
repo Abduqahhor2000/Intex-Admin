@@ -9,6 +9,7 @@ export default function ProductsTable({category_id}) {
     const [isLoading, setIsLoading] = useState(true)
     const [products, setProducts] = useState([])
     const [oneHand, setOneHand] = useState(false)
+    const [oneMadal, setOnaMadal] = useState(false)
 
     const getProducts = async () => {
         if(!oneHand){
@@ -20,6 +21,7 @@ export default function ProductsTable({category_id}) {
                 url: `/api/product/category/${category_id}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })
             setProducts(data?.data?.data)
@@ -33,7 +35,7 @@ export default function ProductsTable({category_id}) {
 
     useEffect(() => {
         getProducts()
-    }, [])
+    }, [oneMadal])
 
     if(isLoading){
         return(
@@ -53,7 +55,7 @@ export default function ProductsTable({category_id}) {
 
     return (
         <div>
-            <table className="w-full">
+            <table className="w-full border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left ">
                     <th className="py-5 rounded-l-3xl pl-11">Изображение</th>
                     <th className="py-5">Цена(сум)</th>
@@ -63,14 +65,13 @@ export default function ProductsTable({category_id}) {
                     <th className="py-5">Глубина(см)</th>
                     <th className="py-5 rounded-r-3xl">Действия</th>
                 </thead>
-                <div className="mt-5"></div>
+                <div className="mt-0.5"></div>
                 <tbody>
                     {
                         products.map(item => {
                             return (
                                 <>
-                                    <ProductItem item={item}/>
-                                    <div className="mt-2"></div>
+                                    <ProductItem key={item.id} item={item} oneMadal={oneMadal} setOneMadal={setOnaMadal}/>
                                 </>
                             )
                         })

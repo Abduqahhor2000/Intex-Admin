@@ -13,8 +13,7 @@ export default function Login() {
     const user = useSelector(state => state.user.user)
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    console.log(user)
- 
+
     useEffect(()=>{
         if(user.token){
           navigate("/products")

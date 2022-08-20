@@ -5,26 +5,23 @@ import "../../scss/productMadal.scss"
 import gr from "../../../img/Gr.png"
 
 
-export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
+export default function AddProductMadal({setMadal}) {
     const token = useSelector(state => state.user.user.token)
     const [categories, setCategories] = useState([])
     const [productStatus, setProductStatus] = useState([])
-    const [quantity, setQuantity] = useState(item.quantity)
-    const [categoryId, setCategoryId] = useState(item.category_id)
-    const [price, setPrice] = useState(item.price)
-    const [salePrice, setSalePrice] = useState(item.sale_price)
-    const [frameRu, setFrameRu] = useState(item.frame_ru)
-    const [frameUz, setFrameUz] = useState(item.frame_uz)
-    const [size, setSize] = useState(item.size)
-    const [depth, setDepth] = useState(item.depth)
-    const [equipmentRu, setEquipmentRu] = useState(item.equipment_ru)
-    const [equipmentUz, setEquipmentUz] = useState(item.equipment_uz)
-    const [statusId, setStatusId] = useState(item.status_id)
-    const [productImage, setProductImage] = useState(item.image)
-    const [imgChange, setImgChange] = useState(false)
+    const [quantity, setQuantity] = useState("")
+    const [categoryId, setCategoryId] = useState("")
+    const [price, setPrice] = useState("")
+    const [salePrice, setSalePrice] = useState("")
+    const [frameRu, setFrameRu] = useState("")
+    const [frameUz, setFrameUz] = useState("")
+    const [size, setSize] = useState("")
+    const [depth, setDepth] = useState("")
+    const [equipmentRu, setEquipmentRu] = useState("")
+    const [equipmentUz, setEquipmentUz] = useState("")
+    const [statusId, setStatusId] = useState("")
+    const [productImage, setProductImage] = useState("")
     const [statusReq, setStatusReq] = useState(null)
-
-    console.log(statusId)
 
     const getCategories = async () => {
         try{
@@ -37,6 +34,7 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
             })
 
             setCategories(data?.data?.data)
+            setCategoryId(data?.data?.data[0].category_id)
         }catch(err){
             console.log(err)
         }
@@ -49,11 +47,11 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
                 url: "api/product/status/info",
                 headers:{
                     Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
                 },
             })
 
             setProductStatus(data?.data?.data)
+            setStatusId(data?.data?.data[0].id)
         }catch(err){
             console.log(err)
         }
@@ -75,7 +73,6 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
     };
     
     const uploadImage = async (event) => {
-        setImgChange(true)
         const file = event.target.files[0];
         const base64 = await convertBase64(file);
         setProductImage(base64);
@@ -83,30 +80,29 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
 
     const editProduct = async () => {
         setStatusReq("active")
+        console.log(
+            categoryId,
+            productImage,
+            price,
+            salePrice,
+            quantity,
+            frameRu,
+            frameUz,
+            size,
+            depth,
+            equipmentRu,
+            equipmentUz,
+            statusId)
         try{
             const data = await https({
-                method: 'put',
-                url: `/api/product/${item.id}`,
+                method: 'post',
+                url: `/api/product/`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
-                  data: imgChange ? 
-                {
+                  data: {
                     categoryId,
                     productImage,
-                    price,
-                    salePrice,
-                    quantity,
-                    frameRu,
-                    frameUz,
-                    size,
-                    depth,
-                    equipmentRu,
-                    equipmentUz,
-                    statusId,
-                }:
-                {
-                    categoryId,
                     price,
                     salePrice,
                     quantity,
@@ -133,9 +129,9 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
 
     return (
         <>
-            <div onClick={()=> {setMadal(false); setOneMadal(!oneMadal)}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
+            <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
             <div className="scrool absolute z-10 flex flex-col justify-between items-center top-0 bg-slate-100 p-12 pt-6 pb-9 rounded-3xl right-1/2 translate-x-1/2 top-10" style={{"width": "1130px"}}>
-                <span onClick={() =>{ setMadal(false); setOneMadal(!oneMadal)}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
+                <span onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 -0.685636 0.727944 0.685636 0.00292969 28.5811)" fill="#B9B9B9"/>

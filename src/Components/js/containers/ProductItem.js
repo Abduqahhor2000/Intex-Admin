@@ -1,15 +1,13 @@
 import { useState } from "react"
 import ProductMadal from "../madals/ProductMadal"
 
-export default function ProductItem({item}) {
+export default function ProductItem({item, setOneMadal, oneMadal}) {
     const [madal, setMadal] = useState(false)
-    console.log("Item", item);
      return (
         <>
             <tr className="bg-white">
-                <td className="rounded-l-3xl py-2.5" >
-                   <img src={item.image} className="h-12 w-1/2 ml-10" alt="img" />
-                    {console.log(item.image)}
+                <td className="rounded-l-3xl" >
+                   <img src={item.image} crossOrigin="anonymous" className="h-16 w-auto ml-10" alt="img"></img>
                 </td>
                 <td className="py-2 flex flex-col justify-center">
                     <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{item.price} сум</span>
@@ -34,7 +32,7 @@ export default function ProductItem({item}) {
                     </div>   
                 </td>
             </tr>
-            {madal ? <ProductMadal setMadal={setMadal} item={item} /> : null}
+            {madal ? <ProductMadal setMadal={setMadal} setOneMadal={setOneMadal} oneMadal={oneMadal} item={item} /> : null}
         </>
         
     )

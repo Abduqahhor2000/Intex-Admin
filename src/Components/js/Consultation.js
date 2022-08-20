@@ -71,14 +71,14 @@ export default function Consultation () {
 
     return(
         <>
-            <table className="w-full">
+            <table className="w-full border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left ">
                     <th className="py-5 rounded-l-3xl pl-11">Имя клиента</th>
                     <th className="py-5">Телефон клиента</th>
                     <th className="py-5">Время</th>
                     <th className="py-5 rounded-r-3xl">Действия</th>
                 </thead>
-                <div className="mt-5"></div>
+                <div className="mt-0.5"></div>
                 <tbody>
                     {
                         consuls.map(item => {
@@ -111,7 +111,6 @@ export default function Consultation () {
                                             </div>   
                                         </td>
                                     </tr>
-                                <div className="mt-2"></div>
                                 </>
                             )
                         })

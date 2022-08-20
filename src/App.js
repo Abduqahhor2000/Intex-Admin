@@ -10,6 +10,7 @@ import Orders from "./Components/js/Orders"
 import Category from "./Components/js/Category"
 import Site from "./Components/js/Site"
 import Login from './Components/js/Login';
+import ErrorPage from "./Components/js/ErrorPage"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/products" element={<Products/>}></Route>
           </Route>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/error" element={<ErrorPage/>}/>
         </Routes>
       </BrowserRouter>
     </div>

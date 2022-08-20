@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import userSlice from './userReducer'
+import errorSlice from './errorReducer'
 import { persistStore,
          persistReducer,
          FLUSH,
@@ -13,6 +14,7 @@ import storage from 'redux-persist/lib/storage'
 
 const rootReducer = combineReducers({
   user: userSlice,
+  error: errorSlice,
 })
 
 const persistConfig = {

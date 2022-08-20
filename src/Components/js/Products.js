@@ -4,6 +4,7 @@ import ProductsTable from "./ProductsTable"
 import { Triangle  } from  'react-loader-spinner'
 import { useSelector } from "react-redux";
 import { https } from "../../axios";
+import AddProductMadal from "./madals/AddProductMadal";
 
 export default function Products() {
     const token = useSelector(state => state.user.user.token)
@@ -11,6 +12,7 @@ export default function Products() {
     const [isLoading, setIsLoading] = useState(true)
     const [categories, setCategories] = useState([])
     const [oneHand, setOneHand] = useState(false)
+    const [madal, setMadal] = useState(false)
 
     const getCategories = async () => {
         try{
@@ -37,7 +39,7 @@ export default function Products() {
 
     useEffect(()=>{
         getCategories()
-    }, [])
+    }, [madal])
 
 
 
@@ -69,7 +71,7 @@ export default function Products() {
                             </svg>
                         </span>
                     </div>
-                    <div className="add pt-4 text-center text-xl font-middle text-white shadow-lg cursor-pointer">
+                    <div onClick={() => {setMadal(true)}} className="add pt-4 text-center text-xl font-middle text-white shadow-lg cursor-pointer">
                         + Добавить продукт
                     </div>
                 </div>
@@ -99,7 +101,9 @@ export default function Products() {
                             )
                         })
                     }
-                    
+                    {
+                        madal ? <AddProductMadal setMadal={setMadal} /> : null
+                    }
                 </div>
             </div>
         </>
