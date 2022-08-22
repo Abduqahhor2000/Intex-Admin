@@ -15,7 +15,7 @@ export default function SalesMadal({setSalesMadal, saleID}) {
     const deleteOrder = async () => {
         try{
             setReqStatus(true)
-            const data = await https({
+            await https({
                 
                 method: 'delete',
                 url: `/api/order/${saleID}`,
@@ -24,7 +24,6 @@ export default function SalesMadal({setSalesMadal, saleID}) {
                 },
             })
             setReqStatus(false)
-            console.log(data)
         }catch(err){
             console.log(err)
         }

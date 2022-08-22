@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import SalesMadal from "./madals/SalesMadal"
 import { Triangle  } from  'react-loader-spinner'
 import { https } from "../../axios"
+import "../scss/productMadal.scss"
 
 export default function Sales () {
     const token = useSelector(state => state.user.user.token)
@@ -11,6 +12,7 @@ export default function Sales () {
     const [saleID, setSaleID] = useState("")
     const [isLoading, setIsLoading] = useState(true)
     const [oneHand, setOneHand] = useState(false)
+    const [reqStatus, setReqStatus] = useState("")
 
     const getSales = async () => {
         if(!oneHand){
@@ -24,7 +26,6 @@ export default function Sales () {
                     Authorization: `Bearer ${token}`,
                 },
             })
-            console.log(data)
             setSales(data.data)
             setIsLoading(false)
             setOneHand(true)
@@ -34,17 +35,19 @@ export default function Sales () {
     }
 
     const updateSales = async (id) => {
+        setReqStatus(id)
         try{
-            const data = await https({
+            await https({
                 method: 'put',
                 url: `/api/order/${id}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
             }).then(()=> getSales())
-            console.log(data)
+            setReqStatus("")
         }catch(err) {
             console.log(err)
+            setReqStatus("")
         }
     }
 
@@ -72,16 +75,17 @@ export default function Sales () {
         <>
             <table className="w-full border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left ">
-                    <th className="py-5 rounded-l-3xl pl-11">Имя клиента</th>
-                    <th className="py-5">Телефон</th>
-                    <th className="py-5">Изображение</th>
-                    <th className="py-5">Размер(м)/ <br/>Глубина(см)</th>
-                    <th className="py-5">Цена(сум)</th>
-                    <th className="py-5">Адрес</th>
-                    <th className="py-5">Время</th>
-                    <th className="py-5 rounded-r-3xl">Действия</th>
+                    <tr>
+                        <th className="py-5 rounded-l-3xl pl-11">Имя клиента</th>
+                        <th className="py-5">Телефон</th>
+                        <th className="py-5">Изображение</th>
+                        <th className="py-5">Размер(м)/ <br/>Глубина(см)</th>
+                        <th className="py-5">Цена(сум)</th>
+                        <th className="py-5">Адрес</th>
+                        <th className="py-5">Время</th>
+                        <th className="py-5 rounded-r-3xl pr-5">Действия</th>
+                    </tr>
                 </thead>
-                <div className="mt-0.5"></div>
                 <tbody>
                     {
                         sales.map(item => {
@@ -101,6 +105,10 @@ export default function Sales () {
                                     <td className="py-1.5 rounded-r-3xl">
                                         <div className="flex">
                                             {
+                                                reqStatus === item.order_id ?
+                                                <span onClick={()=>{updateSales(item.order_id)}} className="p-2 cursor-pointer h-5">
+                                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                                </span> :
                                                 item.status === true ? 
                                                 <span onClick={()=>{updateSales(item.order_id)}} className="p-2 cursor-pointer">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" fill="none">

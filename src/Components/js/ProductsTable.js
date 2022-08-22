@@ -27,7 +27,6 @@ export default function ProductsTable({category_id}) {
             setProducts(data?.data?.data)
             setIsLoading(false)
             setOneHand(true)
-            console.log(data.data)
         }catch(err){
             console.log(err)
         }
@@ -56,23 +55,22 @@ export default function ProductsTable({category_id}) {
     return (
         <div>
             <table className="w-full border-spacing-y-2 border-separate">
-                <thead className="text-xl bg-white text-left ">
-                    <th className="py-5 rounded-l-3xl pl-11">Изображение</th>
-                    <th className="py-5">Цена(сум)</th>
-                    <th className="py-5">Количество</th>
-                    <th className="py-5">Рамка</th>
-                    <th className="py-5">Размер(м)</th>
-                    <th className="py-5">Глубина(см)</th>
-                    <th className="py-5 rounded-r-3xl">Действия</th>
+                <thead className="text-xl bg-white text-left">
+                    <tr>
+                        <th className="py-5 rounded-l-3xl pl-11">Изображение</th>
+                        <th className="py-5">Цена(сум)</th>
+                        <th className="py-5">Количество</th>
+                        <th className="py-5">Рамка</th>
+                        <th className="py-5">Размер(м)</th>
+                        <th className="py-5">Глубина(см)</th>
+                        <th className="py-5 rounded-r-3xl">Действия</th>
+                    </tr>
                 </thead>
-                <div className="mt-0.5"></div>
                 <tbody>
                     {
                         products.map(item => {
                             return (
-                                <>
-                                    <ProductItem key={item.id} item={item} oneMadal={oneMadal} setOneMadal={setOnaMadal}/>
-                                </>
+                                <ProductItem key={item.id} item={item} oneMadal={oneMadal} setOneMadal={setOnaMadal}></ProductItem>
                             )
                         })
                     }

@@ -13,15 +13,10 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
     const [nameRu, setNameRu] = useState(name_ru)
     const [nameUz, setNameUz] = useState(name_uz)
 
-    // const autoClose = statusReq === "complate" ? setTimeout(() => {setCategoryMadal(false)}, 4000) : null
-    // const autoCloseStop = () => {
-    //     clearTimeout(autoClose)
-    // }
-
     const editCategory = async () => {
         setStatusReq("active")
         try{
-            const datan = await https({ 
+            await https({ 
                 method: 'put',
                 url: `/api/category/${id}`,
                 headers:{
@@ -33,7 +28,25 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                 }
             })
             setStatusReq("complate")
-            console.log(datan)
+        }catch(err){
+            console.log(err)
+        }
+    }
+    const addCategory = async () => {
+        setStatusReq("active")
+        try{
+            await https({ 
+                method: 'post',
+                url: `/api/category/`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+                data:{
+                    "nameRu": nameRu,
+                    "nameUz": nameUz,
+                }
+            })
+            setStatusReq("complate")
         }catch(err){
             console.log(err)
         }
@@ -41,7 +54,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
     const deleteCategory = async () => {
         setStatusReq("active")
         try{
-            const datan = await https({ 
+            await https({ 
                 method: 'delete',
                 url: `/api/category/${id}`,
                 headers:{
@@ -52,7 +65,6 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                 }
             })
             setStatusReq("complate")
-            console.log(datan)
         }catch(err){
             console.log(err)
         }
@@ -91,7 +103,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                                         <span className="absolute block right-full bottom-4 mr-2">{inputIcon}</span>  
                                     </label>
                                 </div>
-                                <span onClick={() => editCategory()} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Изменить</span>     
+                                <span onClick={() =>{ id === null ? addCategory() : editCategory()}} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Изменить</span>     
                             </> :
                             <>  
                                 <div className="flex flex-col items-center">

@@ -27,9 +27,9 @@ export default function SiteSectionMadal({typeMadal, setTypeMadal, typeInfo}) {
     const updateSiteInfo = async () => {
         try{   
             setStatusReq("active") 
-            const datan = await https({
+            await https({
                 method: 'put',
-                url: `https://market-index.herokuapp.com/api/site/${typeMadal}`,
+                url: `/api/site/${typeMadal}`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },
@@ -43,8 +43,6 @@ export default function SiteSectionMadal({typeMadal, setTypeMadal, typeInfo}) {
                 )
             })
             setStatusReq("comlate")
-            console.log(datan)
-            
         }catch(err){
             console.log(err)
         }

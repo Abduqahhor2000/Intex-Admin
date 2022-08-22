@@ -56,7 +56,7 @@ export default function Orders() {
     return(
         <>
             <div className="px-10 pt-16">
-                <table  className="w-full text-xl">
+                <table  className="w-full text-xl border-spacing-y-4 border-separate">
                     <tr className="bg-white">
                         <td className="py-1.5 w-72 pl-12 rounded-l-3xl">Телефонный номер</td>
                         <td className="py-1.5 pr-10">{siteInfo.phone_number}</td>
@@ -69,7 +69,6 @@ export default function Orders() {
                             </span>
                         </td>
                     </tr>
-                    <div className="mt-5"></div>
                     <tr className="bg-white">
                         <td className="py-1.5 pl-12 rounded-l-3xl">Адрес</td>
                         <td className="py-1.5 pr-10">{siteInfo.address_uz}</td>
@@ -82,7 +81,6 @@ export default function Orders() {
                             </span>
                         </td>
                     </tr>
-                    <div className="mt-5"></div>
                     <tr className="bg-white">
                         <td className="py-1.5 pl-12 rounded-l-3xl">Рабочее время</td>
                         <td className="py-1.5 pr-10">{siteInfo.work_time_uz}</td>
@@ -95,7 +93,6 @@ export default function Orders() {
                             </span>
                         </td>
                     </tr>
-                    <div className="mt-5"></div>
                     <tr className="bg-white">
                         <td className="py-1.5 pl-12 rounded-l-3xl">Телеграм</td>
                         <td className="py-1.5 pr-10">{siteInfo.telegram_link}</td>
@@ -108,7 +105,6 @@ export default function Orders() {
                             </span>
                         </td>
                     </tr>
-                    <div className="mt-5"></div>
                     <tr className="bg-white">
                         <td className="py-1.5 pl-12 rounded-l-3xl">Инстаграм</td>
                         <td className="py-1.5 pr-10">{siteInfo.instagram_link}</td>

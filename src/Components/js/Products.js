@@ -81,13 +81,11 @@ export default function Products() {
                         {
                             categories.map(item => {
                                 return(
-                                    <>
-                                        <span className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${category_id === item.category_id ? "active" : ""}`}
-                                            onClick={() => setCategory_id(item.category_id)}
-                                        >
-                                            {item.name_ru}
-                                        </span>
-                                    </>
+                                    <span key={item.category_id} className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${category_id === item.category_id ? "active" : ""}`}
+                                        onClick={() => setCategory_id(item.category_id)}
+                                    >
+                                        {item.name_ru}
+                                    </span>
                                 )
                             })
                         }
@@ -95,9 +93,9 @@ export default function Products() {
                     {
                         categories.map(item => {
                             return(
-                                <>
+                                <div key={item.category_id}>
                                     {item.category_id === category_id ? <ProductsTable category_id={category_id}/> : null}
-                                </>
+                                </div>
                             )
                         })
                     }
