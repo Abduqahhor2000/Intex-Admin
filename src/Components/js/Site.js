@@ -57,6 +57,8 @@ export default function Orders() {
         <>
             <div className="px-10 pt-16">
                 <table  className="w-full text-xl border-spacing-y-4 border-separate">
+                    <thead></thead>
+                    <tbody>
                     <tr className="bg-white">
                         <td className="py-1.5 w-72 pl-12 rounded-l-3xl">Телефонный номер</td>
                         <td className="py-1.5 pr-10">{siteInfo.phone_number}</td>
@@ -117,6 +119,8 @@ export default function Orders() {
                             </span>
                         </td>
                     </tr>
+                    </tbody>
+                    
                 </table>
             </div>
             {

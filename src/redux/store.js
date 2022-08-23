@@ -1,6 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import userSlice from './userReducer'
 import errorSlice from './errorReducer'
+import categoryReducer from "./categoryReducer"
+import consultationReducer from "./consultationReducer"
+import orderReducer from './orderReducer'
+import productReducer from './productReducer'
+import siteInfoReducer from './siteInfoReducer'
+import storage from 'redux-persist/lib/storage'
 import { persistStore,
          persistReducer,
          FLUSH,
@@ -10,11 +16,15 @@ import { persistStore,
          PURGE,
          REGISTER,
  } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
 
 const rootReducer = combineReducers({
   user: userSlice,
   error: errorSlice,
+  siteInfo: siteInfoReducer,
+  category: categoryReducer,
+  consultation: consultationReducer,
+  order: orderReducer,
+  product: productReducer,
 })
 
 const persistConfig = {

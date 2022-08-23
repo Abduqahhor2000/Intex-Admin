@@ -1,23 +1,119 @@
 import "../scss/MeanSection.scss"
 import { Link, Outlet, useLocation, useNavigate} from "react-router-dom";
-import { useEffect } from "react";
+import { https } from "../../axios"
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../../redux/userReducer";
+import { addAllCategories } from "../../redux/categoryReducer"
+import { addAllConsultations } from "../../redux/consultationReducer"
+import { addAllProducts } from "../../redux/productReducer";
+import { addAllOrders } from "../../redux/orderReducer"
+import { addAllSiteInfo } from "../../redux/siteInfoReducer"
 
 export default function MeanSection() {
+    const [timer, setTimer] = useState("")
     const user = useSelector(state => state.user.user)
+    const token = useSelector(state => state.user.user.token)
     let {pathname} = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const getCategories = async () => {
+        console.log("start")
+        try{
+            const {data} = await https.get("/api/category", {
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            dispatch(addAllCategories(data.data))
+            console.log(data)
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const getConsultations = async () => {
+        try{
+            const {data} = await https({
+                method: 'get',
+                url: `/api/consultation`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            dispatch(addAllConsultations(data.data))
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const getOrders =  async () => {
+        try{
+            const {data} = await https({
+                method: 'get',
+                url: `/api/order`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            dispatch(addAllOrders(data.data))
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const getProducts = async () => {
+        try{
+            const {data} = await https({
+                method: 'get',
+                url: `/api/product`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+            dispatch(addAllProducts(data?.data))
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    const getSiteInfo = async () => {
+        try{
+            const {data} = await https({
+                method: 'get',
+                url: `/api/site/`,
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            dispatch(addAllSiteInfo(data?.data))
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    function start() {
+        getConsultations()
+        getProducts()
+        getOrders()
+        getCategories()
+        getSiteInfo()
+        setTimer(new Date().getTime())
+    }
+
     useEffect(()=>{
-      if(!user.token){
+      if(!token){
         navigate("/login")
+      }
+      if(token && (((new Date().getTime() - timer) > 60000) || (timer === ""))){
+        start()
       }
       if(pathname === "/"){
         navigate("/products")
       }
-    }, [navigate, user, pathname])
+    }, [navigate, token, pathname])
  
     return(
         <>

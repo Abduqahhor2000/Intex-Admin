@@ -1,32 +1,27 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { Triangle  } from  'react-loader-spinner'
 import { useEffect, useState } from "react"
 import ProductItem from "./containers/ProductItem"
 import { https } from "../../axios"
+import { addAllProducts } from "../../redux/productReducer";
 
 export default function ProductsTable({category_id}) {
     const token = useSelector(state => state.user.user.token)
-    const [isLoading, setIsLoading] = useState(true)
-    const [products, setProducts] = useState([])
-    const [oneHand, setOneHand] = useState(false)
+    const products = useSelector(state => state.user.product.products)
     const [oneMadal, setOnaMadal] = useState(false)
+    const dispatch = useDispatch()
 
     const getProducts = async () => {
-        if(!oneHand){
-            setIsLoading(true)
-        }
         try{
-            const data = await https({
+            const {data} = await https({
                 method: 'get',
-                url: `/api/product/category/${category_id}`,
+                url: `/api/product`,
                 headers:{
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
             })
-            setProducts(data?.data?.data)
-            setIsLoading(false)
-            setOneHand(true)
+            dispatch(addAllProducts(data.data))
         }catch(err){
             console.log(err)
         }
@@ -36,7 +31,7 @@ export default function ProductsTable({category_id}) {
         getProducts()
     }, [oneMadal])
 
-    if(isLoading){
+    if(!products.length){
         return(
             <div style={{"width": "300px"}} className="mx-auto mt-40" >
                 <Triangle 
@@ -69,6 +64,9 @@ export default function ProductsTable({category_id}) {
                 <tbody>
                     {
                         products.map(item => {
+                            if(item.category_id !== category_id){
+                                return null;
+                            }
                             return (
                                 <ProductItem key={item.id} item={item} oneMadal={oneMadal} setOneMadal={setOnaMadal}></ProductItem>
                             )

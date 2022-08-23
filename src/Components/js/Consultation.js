@@ -12,7 +12,7 @@ export default function Consultation () {
     const [consuls, setConsuls] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [oneHand, setOneHand] = useState(false)
-    const [reqStatus, setReqStatus] = useState(4)
+    const [reqStatus, setReqStatus] = useState("")
 
     const getConsultation = async () => {
         if(!oneHand){
