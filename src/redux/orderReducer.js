@@ -7,16 +7,16 @@ export const orderSlice = createSlice({
   },
   reducers: {
     addAllOrders: (state, action) => { 
-      state.orders = action.payload.data
+      state.orders = action.payload
     },
     updateOrder : (state, action) => {
-      state.orders = state.orders.map((item) => item.order_id === action.payload.data.order_id ? action.payload.data : item)
+      state.orders = state.orders.map((item) => item.order_id === action.payload.order_id ? action.payload : item)
+    },
+    delOneOrder: (state, action) => {
+      state.orders = state.orders.filter((item) => item.order_id === action.payload.order_id ? false : true)
     },
     delAllOrders: (state) => {
       state.orders = []
-    },
-    delOneOrder: (state, action) => {
-      state.orders = state.orders.filter((item) => item.order_id === action.payload.data.order_id ? false : true)
     },
   },
 })

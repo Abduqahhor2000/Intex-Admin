@@ -9,7 +9,7 @@ export async function getOrders (token, dispatch, addAllOrders) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        dispatch(addAllOrders(data.data))
+        dispatch(addAllOrders(data?.data))
     }catch(err){
         console.log(err)
     }

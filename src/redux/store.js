@@ -3,6 +3,7 @@ import userSlice from './userReducer'
 import errorSlice from './errorReducer'
 import categoryReducer from "./categoryReducer"
 import consultationReducer from "./consultationReducer"
+import productStatusReducer from './productStatusReducer'
 import orderReducer from './orderReducer'
 import productReducer from './productReducer'
 import siteInfoReducer from './siteInfoReducer'
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   consultation: consultationReducer,
   order: orderReducer,
   product: productReducer,
+  productStatus: productStatusReducer,
 })
 
 const persistConfig = {

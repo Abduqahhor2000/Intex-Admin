@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react"
-import {useSelector} from "react-redux"
+import {useSelector, useDispatch} from "react-redux"
+import { getCategories } from "../fetching/getCategories"
+import { getProductStatus } from "../fetching/getProductStatus"
+import { addAllCategories } from "../../../redux/categoryReducer"
+import { addProductStatus } from "../../../redux/productStatusReducer"
+import { updateProduct } from "../../../redux/productReducer"
+import { baseURL } from "../../../axios"
 import { https } from "../../../axios"
 import "../../scss/productMadal.scss"
 import gr from "../../../img/Gr.png"
 
 
-export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
+export default function ProductMadal({setMadal, item}) {
     const token = useSelector(state => state.user.user.token)
-    const [categories, setCategories] = useState([])
-    const [productStatus, setProductStatus] = useState([])
+    const dispatch = useDispatch()
+    const categories = useSelector(state => state.user.category.categories)
+    const productStatus = useSelector(state => state.user.productStatus.productStatus)
     const [quantity, setQuantity] = useState(item.quantity)
     const [categoryId, setCategoryId] = useState(item.category_id)
     const [price, setPrice] = useState(item.price)
@@ -25,38 +32,38 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
     const [statusReq, setStatusReq] = useState(null)
     const [notRequer, setNotRequer] = useState(false)
 
-    const getCategories = async () => {
-        try{
-            const data = await https({
-                method: "get",
-                url: "api/category",
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+    // const getCategories = async () => {
+    //     try{
+    //         const data = await https({
+    //             method: "get",
+    //             url: "api/category",
+    //             headers:{
+    //                 Authorization: `Bearer ${token}`,
+    //             },
+    //         })
 
-            setCategories(data?.data?.data)
-        }catch(err){
-            console.log(err)
-        }
-    }
+    //         setCategories(data?.data?.data)
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
     
-    const getProductStatus = async () => {
-        try{
-            const data = await https({
-                method: "get",
-                url: "api/product/status/info",
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-            })
+    // const getProductStatus = async () => {
+    //     try{
+    //         const data = await https({
+    //             method: "get",
+    //             url: "api/product/status/info",
+    //             headers:{
+    //                 Authorization: `Bearer ${token}`,
+    //                 'Content-Type': 'application/json'
+    //             },
+    //         })
 
-            setProductStatus(data?.data?.data)
-        }catch(err){
-            console.log(err)
-        }
-    }
+    //         setProductStatus(data?.data?.data)
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -93,7 +100,7 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
         }
         setStatusReq("active")
         try{
-            await https({
+            const {data} = await https({
                 method: 'put',
                 url: `/api/product/${item.id}`,
                 headers:{
@@ -129,21 +136,36 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
                 }
             })
             setStatusReq("complate")
+            dispatch(updateProduct({ 
+                ...item,
+                price,
+                quantity,
+                size,
+                depth,
+                category_id: categoryId,
+                image: `${baseURL}${data?.data[0]?.image}`,
+                sale_price: salePrice,
+                frame_ru: frameRu,
+                frame_uz: frameUz,
+                status_id: statusId,
+                equipment_uz: equipmentUz,
+                equipment_ru: equipmentRu,                                                                                                                                              
+            }))
         }catch(err){
             console.log(err)
         }
     }
 
     useEffect(()=>{
-        getCategories()
-        getProductStatus()
-    },[])
+        getCategories(token, dispatch, addAllCategories)
+        getProductStatus(token, dispatch, addProductStatus)
+    },[token, dispatch])
 
     return (
         <>
-             <div onClick={()=> {setMadal(false); setOneMadal(!oneMadal)}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
+             <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
             <div className="scrool absolute z-10 flex flex-col justify-between items-center top-0 bg-slate-100 p-12 pt-6 pb-9 rounded-3xl right-1/2 translate-x-1/2 top-10" style={{"width": "1130px"}}>
-                <span onClick={() =>{ setMadal(false); setOneMadal(!oneMadal)}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
+                <span onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 -0.685636 0.727944 0.685636 0.00292969 28.5811)" fill="#B9B9B9"/>
@@ -174,9 +196,9 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
                                 <select value={categoryId} onChange={(e)=>{setCategoryId(e.target.value)}} className="w-96 h-12 text-3xl text-slate-600 bg-transparent cursor-pointer border-b-2 border-solid border-slate-600">
                                     {
                                         categories.map(item => {
-                                            console.log(item, categoryId)
+                                            // console.log(item, categoryId)
                                             return (
-                                                <option value={item.category_id}>{item.name_ru}</option>
+                                                <option key={item.category_id} value={item.category_id}>{item.name_ru}</option>
                                             )
                                         })
                                     }
@@ -209,21 +231,21 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
                                     <path d="M26.7654 0.5625H2.87677C2.3008 0.5625 1.74842 0.832903 1.34115 1.31422C0.933881 1.79555 0.705078 2.44836 0.705078 3.12905V26.228C0.705078 26.9087 0.933881 27.5615 1.34115 28.0428C1.74842 28.5241 2.3008 28.7945 2.87677 28.7945H26.7654C27.3414 28.7945 27.8938 28.5241 28.301 28.0428C28.7083 27.5615 28.9371 26.9087 28.9371 26.228V3.12905C28.9371 2.44836 28.7083 1.79555 28.301 1.31422C27.8938 0.832903 27.3414 0.5625 26.7654 0.5625ZM9.39186 24.9447H5.04847C4.76048 24.9447 4.4843 24.8095 4.28066 24.5689C4.07702 24.3282 3.96262 24.0018 3.96262 23.6614V18.5283C3.96262 18.188 4.07702 17.8616 4.28066 17.6209C4.4843 17.3803 4.76048 17.2451 5.04847 17.2451C5.33645 17.2451 5.61264 17.3803 5.81628 17.6209C6.01992 17.8616 6.13432 18.188 6.13432 18.5283V22.3782H9.39186C9.67985 22.3782 9.95604 22.5134 10.1597 22.754C10.3633 22.9947 10.4777 23.3211 10.4777 23.6614C10.4777 24.0018 10.3633 24.3282 10.1597 24.5689C9.95604 24.8095 9.67985 24.9447 9.39186 24.9447ZM25.6796 10.8287C25.6796 11.169 25.5652 11.4954 25.3615 11.7361C25.1579 11.9768 24.8817 12.112 24.5937 12.112C24.3057 12.112 24.0296 11.9768 23.8259 11.7361C23.6223 11.4954 23.5079 11.169 23.5079 10.8287V6.97887H20.2503C19.9624 6.97887 19.6862 6.84367 19.4825 6.60301C19.2789 6.36235 19.1645 6.03594 19.1645 5.6956C19.1645 5.35525 19.2789 5.02885 19.4825 4.78819C19.6862 4.54753 19.9624 4.41232 20.2503 4.41232H24.5937C24.8817 4.41232 25.1579 4.54753 25.3615 4.78819C25.5652 5.02885 25.6796 5.35525 25.6796 5.6956V10.8287Z" fill="#545454"/>
                                 </svg>
                                 <label className="text-2xl text-slate-400">Рамка <span className="text-red-500">*</span> </label>
-                                <input value={frameRu} onChange={(e)=>{setFrameRu(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (frameRu.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
+                                <input value={frameRu} maxlength={50} onChange={(e)=>{setFrameRu(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (frameRu.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
                             </div>
                             <div className="relative flex flex-col pl-10 mx-5 mb-3">
                                 <svg className="absolute left-0 bottom-2" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
                                     <path d="M26.7654 0.5625H2.87677C2.3008 0.5625 1.74842 0.832903 1.34115 1.31422C0.933881 1.79555 0.705078 2.44836 0.705078 3.12905V26.228C0.705078 26.9087 0.933881 27.5615 1.34115 28.0428C1.74842 28.5241 2.3008 28.7945 2.87677 28.7945H26.7654C27.3414 28.7945 27.8938 28.5241 28.301 28.0428C28.7083 27.5615 28.9371 26.9087 28.9371 26.228V3.12905C28.9371 2.44836 28.7083 1.79555 28.301 1.31422C27.8938 0.832903 27.3414 0.5625 26.7654 0.5625ZM9.39186 24.9447H5.04847C4.76048 24.9447 4.4843 24.8095 4.28066 24.5689C4.07702 24.3282 3.96262 24.0018 3.96262 23.6614V18.5283C3.96262 18.188 4.07702 17.8616 4.28066 17.6209C4.4843 17.3803 4.76048 17.2451 5.04847 17.2451C5.33645 17.2451 5.61264 17.3803 5.81628 17.6209C6.01992 17.8616 6.13432 18.188 6.13432 18.5283V22.3782H9.39186C9.67985 22.3782 9.95604 22.5134 10.1597 22.754C10.3633 22.9947 10.4777 23.3211 10.4777 23.6614C10.4777 24.0018 10.3633 24.3282 10.1597 24.5689C9.95604 24.8095 9.67985 24.9447 9.39186 24.9447ZM25.6796 10.8287C25.6796 11.169 25.5652 11.4954 25.3615 11.7361C25.1579 11.9768 24.8817 12.112 24.5937 12.112C24.3057 12.112 24.0296 11.9768 23.8259 11.7361C23.6223 11.4954 23.5079 11.169 23.5079 10.8287V6.97887H20.2503C19.9624 6.97887 19.6862 6.84367 19.4825 6.60301C19.2789 6.36235 19.1645 6.03594 19.1645 5.6956C19.1645 5.35525 19.2789 5.02885 19.4825 4.78819C19.6862 4.54753 19.9624 4.41232 20.2503 4.41232H24.5937C24.8817 4.41232 25.1579 4.54753 25.3615 4.78819C25.5652 5.02885 25.6796 5.35525 25.6796 5.6956V10.8287Z" fill="#545454"/>
                                 </svg>
                                 <label className="text-2xl text-slate-400">Рамка на узбекском  <span className="text-red-500">*</span></label>
-                                <input value={frameUz} onChange={(e)=>{setFrameUz(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (frameUz.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
+                                <input value={frameUz} maxLength={50} onChange={(e)=>{setFrameUz(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (frameUz.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
                             </div>
                             <div className="relative flex flex-col pl-10 mx-5 mb-3">
                                 <svg className="absolute left-0 bottom-2" xmlns="http://www.w3.org/2000/svg" width="38" height="39" viewBox="0 0 38 39" fill="none">
                                     <path d="M32.82 29.1947C32.5488 30.5232 31.8269 31.7172 30.7766 32.5746C29.7262 33.4321 28.4118 33.9003 27.0559 33.9H10.5872C9.23134 33.9003 7.91698 33.4321 6.86661 32.5746C5.81624 31.7172 5.09438 30.5232 4.8232 29.1947H15.0056L16.3254 30.5145C16.6531 30.8425 17.0423 31.1026 17.4706 31.2801C17.8989 31.4576 18.358 31.5489 18.8216 31.5489C19.2852 31.5489 19.7443 31.4576 20.1726 31.2801C20.6009 31.1026 20.99 30.8425 21.3178 30.5145L22.6376 29.1947H32.82ZM32.9376 26.842H24.9832C25.4375 26.3341 25.7351 25.7055 25.8399 25.0322C25.9447 24.3588 25.8523 23.6696 25.5739 23.0476C25.2955 22.4256 24.843 21.8975 24.271 21.5271C23.699 21.1568 23.032 20.9599 22.3506 20.9603V18.6077C23.0316 18.6072 23.698 18.4097 24.2693 18.0389C24.8406 17.6682 25.2924 17.14 25.5702 16.5183C25.848 15.8965 25.94 15.2075 25.835 14.5346C25.73 13.8617 25.4326 13.2336 24.9785 12.726H32.9376V26.842ZM4.8232 10.3733H15.0103L16.3278 9.05581C16.9894 8.39495 17.8864 8.02374 18.8216 8.02374C19.7568 8.02374 20.6537 8.39495 21.3154 9.05581L22.6329 10.3733H32.82C32.5488 9.0448 31.8269 7.85078 30.7766 6.99334C29.7262 6.1359 28.4118 5.66769 27.0559 5.66797H10.5872C9.23134 5.66769 7.91698 6.1359 6.86661 6.99334C5.81624 7.85078 5.09438 9.0448 4.8232 10.3733ZM12.7988 17.5748C12.1605 16.9372 11.7907 16.0794 11.7654 15.1776C11.74 14.2758 12.0609 13.3985 12.6623 12.726H4.70557V26.842H12.6599C12.2057 26.3341 11.9081 25.7055 11.8033 25.0322C11.6985 24.3588 11.7909 23.6696 12.0692 23.0476C12.3476 22.4256 12.8002 21.8975 13.3722 21.5271C13.9441 21.1568 14.6111 20.9599 15.2926 20.9603V18.6077C14.3892 18.6077 13.4857 18.2642 12.7988 17.5748ZM23.1834 15.9115C23.0742 16.021 22.9444 16.108 22.8014 16.1673C22.6585 16.2266 22.5053 16.2571 22.3506 16.2571C22.1959 16.2571 22.0427 16.2266 21.8997 16.1673C21.7568 16.108 21.627 16.021 21.5177 15.9115L19.9979 14.3893V25.1787L21.5177 23.6565C21.7386 23.4356 22.0382 23.3115 22.3506 23.3115C22.663 23.3115 22.9626 23.4356 23.1834 23.6565C23.4043 23.8774 23.5284 24.177 23.5284 24.4893C23.5284 24.8017 23.4043 25.1013 23.1834 25.3222L19.6544 28.8512C19.5452 28.9607 19.4154 29.0476 19.2724 29.1069C19.1295 29.1663 18.9763 29.1968 18.8216 29.1968C18.6669 29.1968 18.5137 29.1663 18.3707 29.1069C18.2278 29.0476 18.098 28.9607 17.9887 28.8512L14.4597 25.3222C14.2389 25.1013 14.1148 24.8017 14.1148 24.4893C14.1148 24.177 14.2389 23.8774 14.4597 23.6565C14.6806 23.4356 14.9802 23.3115 15.2926 23.3115C15.605 23.3115 15.9045 23.4356 16.1254 23.6565L17.6453 25.1787V14.3893L16.1254 15.9115C16.0161 16.0209 15.8862 16.1076 15.7433 16.1668C15.6004 16.226 15.4473 16.2565 15.2926 16.2565C15.1379 16.2565 14.9847 16.226 14.8419 16.1668C14.699 16.1076 14.5691 16.0209 14.4597 15.9115C14.3504 15.8021 14.2636 15.6723 14.2044 15.5294C14.1452 15.3865 14.1148 15.2333 14.1148 15.0787C14.1148 14.924 14.1452 14.7708 14.2044 14.6279C14.2636 14.485 14.3504 14.3552 14.4597 14.2458L17.9887 10.7168C18.098 10.6073 18.2278 10.5203 18.3707 10.461C18.5137 10.4017 18.6669 10.3712 18.8216 10.3712C18.9763 10.3712 19.1295 10.4017 19.2724 10.461C19.4154 10.5203 19.5452 10.6073 19.6544 10.7168L23.1834 14.2458C23.293 14.3551 23.3799 14.4849 23.4392 14.6278C23.4985 14.7707 23.529 14.9239 23.529 15.0787C23.529 15.2334 23.4985 15.3866 23.4392 15.5295C23.3799 15.6724 23.293 15.8022 23.1834 15.9115Z" fill="#545454"/>
                                 </svg>
                                 <label className="text-2xl text-slate-400">Размер (м) <span className="text-red-500">*</span> </label>
-                                <input value={size} onChange={(e)=>{setSize(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (size.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
+                                <input value={size} maxLength={10} onChange={(e)=>{setSize(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (size.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
                             </div>
                             <div className="relative flex flex-col pl-10 mx-5 mb-3">
                                 <svg className="absolute left-0 bottom-2" xmlns="http://www.w3.org/2000/svg" width="38" height="39" viewBox="0 0 38 39" fill="none">
@@ -260,7 +282,7 @@ export default function ProductMadal({setMadal, item, setOneMadal, oneMadal}) {
                         <div className="flex flex-col items-center">
                             <img className={`grayscale duration-300 w-40 ${ statusReq !== "active" ? "grayscale-0" : ""}`} src={gr} alt=""/> 
                             <h2 className="text-5xl font-bolder mb-10">Спасибо!</h2>
-                            <p className="text-2xl font-middle">Удаление прошло успешно.</p>
+                            <p className="text-2xl font-middle">Продукт был обновлен.</p>
                         </div>
                     </>
                 }

@@ -2,7 +2,7 @@ import { useState } from "react"
 import DelProductMadal from "../madals/DelProductMadal"
 import ProductMadal from "../madals/ProductMadal"
 
-export default function ProductItem({item, setOneMadal, oneMadal}) {
+export default function ProductItem({item}) {
     const [madal, setMadal] = useState(false)
     const [productID, setProductID] = useState("")
 
@@ -35,8 +35,8 @@ export default function ProductItem({item, setOneMadal, oneMadal}) {
                     </div>   
                 </td>
             </tr>
-            {madal ? <ProductMadal setMadal={setMadal} setOneMadal={setOneMadal} oneMadal={oneMadal} item={item} /> : null}
-            {productID ? <DelProductMadal setProductID={setProductID} productID={productID} setOneMadal={setOneMadal} oneMadal={oneMadal}/> : null}
+            {madal ? <ProductMadal setMadal={setMadal} item={item} /> : null}
+            {productID ? <DelProductMadal setProductID={setProductID} productID={productID} /> : null}
         </>
         
     )

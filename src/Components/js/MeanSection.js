@@ -1,6 +1,5 @@
 import "../scss/MeanSection.scss"
 import { Link, Outlet, useLocation, useNavigate} from "react-router-dom";
-import { https } from "../../axios"
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser } from "../../redux/userReducer";
@@ -9,6 +8,13 @@ import { addAllConsultations } from "../../redux/consultationReducer"
 import { addAllProducts } from "../../redux/productReducer";
 import { addAllOrders } from "../../redux/orderReducer"
 import { addAllSiteInfo } from "../../redux/siteInfoReducer"
+import { addProductStatus } from "../../redux/productStatusReducer";
+import { getCategories } from "./fetching/getCategories"
+import { getConsultations } from "./fetching/getConsultations"
+import { getSiteInfo } from "./fetching/getSiteInfo"
+import { getProducts } from "./fetching/getProducts"
+import { getOrders } from "./fetching/getOrders"
+import { getProductStatus } from "./fetching/getProductStatus";
 
 export default function MeanSection() {
     const [timer, setTimer] = useState("")
@@ -18,88 +24,13 @@ export default function MeanSection() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const getCategories = async () => {
-        console.log("start")
-        try{
-            const {data} = await https.get("/api/category", {
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            dispatch(addAllCategories(data.data))
-            console.log(data)
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-    const getConsultations = async () => {
-        try{
-            const {data} = await https({
-                method: 'get',
-                url: `/api/consultation`,
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            dispatch(addAllConsultations(data.data))
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-    const getOrders =  async () => {
-        try{
-            const {data} = await https({
-                method: 'get',
-                url: `/api/order`,
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            dispatch(addAllOrders(data.data))
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-    const getProducts = async () => {
-        try{
-            const {data} = await https({
-                method: 'get',
-                url: `/api/product`,
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-            })
-            dispatch(addAllProducts(data?.data))
-        }catch(err){
-            console.log(err)
-        }
-    }
-
-    const getSiteInfo = async () => {
-        try{
-            const {data} = await https({
-                method: 'get',
-                url: `/api/site/`,
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            dispatch(addAllSiteInfo(data?.data))
-        }catch(err){
-            console.log(err)
-        }
-    }
-
     function start() {
-        getConsultations()
-        getProducts()
-        getOrders()
-        getCategories()
-        getSiteInfo()
+        getConsultations(token, dispatch, addAllConsultations)
+        getProducts(token, dispatch, addAllProducts)
+        getOrders(token, dispatch, addAllOrders)
+        getCategories(token, dispatch, addAllCategories)
+        getSiteInfo(token, dispatch, addAllSiteInfo)
+        getProductStatus(token, dispatch, addProductStatus)
         setTimer(new Date().getTime())
     }
 
@@ -113,7 +44,7 @@ export default function MeanSection() {
       if(pathname === "/"){
         navigate("/products")
       }
-    }, [navigate, token, pathname])
+    }, [navigate, token, pathname, timer])
  
     return(
         <>

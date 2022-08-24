@@ -9,7 +9,7 @@ export async function getConsultations (token, dispatch, addAllConsultations) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        dispatch(addAllConsultations(data.data))
+        dispatch(addAllConsultations(data?.data))
     }catch(err){
         console.log(err)
     }

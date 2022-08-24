@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
+import { delOneOrder } from "../../../redux/orderReducer"
 
 export default function SalesMadal({setSalesMadal, saleID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState(null)
+    const dispatch = useDispatch()
 
     // const autoClose = reqStatus === false ? setTimeout(() => {setSalesMadal(false)}, 4000) : null
     // const autoCloseStop = () => {
@@ -23,6 +25,9 @@ export default function SalesMadal({setSalesMadal, saleID}) {
                     Authorization: `Bearer ${token}`,
                 },
             })
+            dispatch(delOneOrder({
+                order_id: saleID
+            }))
             setReqStatus(false)
         }catch(err){
             console.log(err)

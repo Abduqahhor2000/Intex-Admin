@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
+import { delOneConsultation } from "../../../redux/consultationReducer"
 
 export default function ConsultationMadal({setConsulMadal, consulID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState(null)
+    const dispatch = useDispatch()
 
     // const autoClose = reqStatus === false ? setTimeout(() => {setSalesMadal(false)}, 4000) : null
     // const autoCloseStop = () => {
@@ -22,6 +24,9 @@ export default function ConsultationMadal({setConsulMadal, consulID}) {
                     Authorization: `Bearer ${token}`,
                 },
             })
+            dispatch(delOneConsultation({
+                consultation_id: consulID,
+            }))
             setReqStatus(false)
         }catch(err){
             console.log(err)

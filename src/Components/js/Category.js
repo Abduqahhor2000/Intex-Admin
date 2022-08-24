@@ -1,45 +1,45 @@
 import { useEffect, useState } from "react";
 import CategorySectionMadal from "./madals/CategorySectionMadal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
-import { https } from "../../axios";
+import { getCategories } from "./fetching/getCategories"
+import { addAllCategories } from "../../redux/categoryReducer"
 
 export default function Category() {
     const [categoryMadal, setCategoryMadal] = useState(false);
     const [name_ru, setName_ru] = useState("")
     const [name_uz, setName_uz] = useState("")
     const [id, setId] = useState(null)
-    const [categories, setCategories] =  useState([])
-    const user = useSelector(state => state.user.user)
-    const [isLoading, setIsLoading] = useState(true)
-    const [oneHand, setOneHand] = useState(false)
+    const token = useSelector(state => state.user.user.token)
+    const categories = useSelector(state=> state.user?.category?.categories)
+    const dispatch = useDispatch()
     
-    const getCategory = async () => {
-        try{
-            if(!oneHand){
-                setIsLoading(true)
-            }
-            const {data} = await https.get("/api/category", 
-                {
-                    headers:{
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                }
-            )
-            setCategories(data.data)
-            setIsLoading(false)
-            setOneHand(true)
-        }catch(err){
-            console.log(err)
-        }
-    }
+    // const getCategory = async () => {
+    //     try{
+    //         if(!oneHand){
+    //             setIsLoading(true)
+    //         }
+    //         const {data} = await https.get("/api/category", 
+    //             {
+    //                 headers:{
+    //                     Authorization: `Bearer ${user.token}`,
+    //                 },
+    //             }
+    //         )
+    //         setCategories(data.data)
+    //         setIsLoading(false)
+    //         setOneHand(true)
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
 
     useEffect(()=>{
-        if(categoryMadal === false){ getCategory() }
+        if(!categoryMadal){ getCategories(token, dispatch, addAllCategories) }
        
     }, [categoryMadal])
 
-    if(isLoading){
+    if(categories.length === 0){
         return(
             <div style={{"width": "300px"}} className="mx-auto mt-40" >
                 <Triangle 

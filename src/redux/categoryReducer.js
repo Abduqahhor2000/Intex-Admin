@@ -15,11 +15,11 @@ export const categorySlice = createSlice({
     updateCategory : (state, action) => {
       state.categories = state.categories.map((item) => item.category_id === action.payload.category_id ? action.payload: item)
     },
-    delAllCategories: (state) => {
-      state.categories = []
-    },
     delOneCategory: (state, action) => {
       state.categories = state.categories.filter((item) => item.category_id === action.payload.category_id ? false : true)
+    },
+    delAllCategories: (state) => {
+      state.categories = []
     },
   },
 })

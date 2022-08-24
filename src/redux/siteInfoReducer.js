@@ -15,24 +15,24 @@ export const siteInfoSlice = createSlice({
   },
   reducers: {
     addAllSiteInfo: (state, action) => { 
-      state.siteInfo = action.payload.data
+      state.siteInfo = action.payload
     },
-    update_phone_number: (state, action) => {
-      state.siteInfo.phone_number = action.payload?.data
+    updateSiteInfo: (state, action) => {
+      state.siteInfo = {...state.siteInfo, payload: action.payload}
     },
     update_address : (state, action) => {
-      state.siteInfo.address_ru = action.payload?.data?.address_ru
-      state.siteInfo.address_uz = action.payload?.data?.address_uz
+      state.siteInfo.address_ru = action.payload?.address_ru
+      state.siteInfo.address_uz = action.payload?.address_uz
     },
     update_work_time : (state, action) => {
-      state.siteInfo.work_time_ru = action.payload?.data?.work_time_ru
-      state.siteInfo.work_time_uz = action.payload?.data?.work_time_uz
+      state.siteInfo.work_time_ru = action.payload?.work_time_ru
+      state.siteInfo.work_time_uz = action.payload?.work_time_uz
     },
     update_telegram_link : (state, action) => {
-      state.siteInfo.telegram_link = action.payload?.data
+      state.siteInfo.telegram_link = action.payload
     },
     update_instagram_link : (state, action) => {
-      state.siteInfo.instagram_link = action.payload?.data
+      state.siteInfo.instagram_link = action.payload
     },
     delAllSiteInfo: (state) => {
       state.siteInfo = {

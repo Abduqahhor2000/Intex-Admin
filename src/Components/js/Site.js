@@ -1,43 +1,23 @@
 import { useState } from "react";
 import SiteSectionMadal from "./madals/SiteSectionMadal"
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
-import { https } from "../../axios";
+import { getSiteInfo } from "./fetching/getSiteInfo"
+import { addAllSiteInfo } from "../../redux/siteInfoReducer"
 
 export default function Orders() {
     const token = useSelector(state => state.user.user.token)
     const [typeMadal, setTypeMadal] = useState(null);
     const [typeInfo, setTypeInfo] = useState({})
-    const [siteInfo, setSiteInfo] = useState({})
-    const [isLoading, setIsLoading] = useState(true)
-    const [oneHand, setOneHand] = useState(false)
-
-    const getSiteInfo = async () => {
-        try{
-            if(!oneHand){
-                setIsLoading(true)
-            }
-            const {data} = await https({
-                method: 'get',
-                url: `/api/site`,
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            setIsLoading(false)
-            setSiteInfo(data.data[0])
-            setOneHand(true)
-        }catch(err){
-            console.log(err)
-        }
-    }
+    const siteInfo = useSelector(state => state.user.siteInfo.siteInfo)
+    const dispatch = useDispatch()
 
     useEffect(()=>{
-        getSiteInfo()
+        getSiteInfo(token, dispatch, addAllSiteInfo)
     }, [typeMadal])
 
-    if(isLoading){
+    if(!siteInfo.phone_number){
         return(
             <div style={{"width": "300px"}} className="mx-auto mt-40" >
                 <Triangle 

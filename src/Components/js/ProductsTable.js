@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { Triangle  } from  'react-loader-spinner'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import ProductItem from "./containers/ProductItem"
 import { https } from "../../axios"
 import { addAllProducts } from "../../redux/productReducer";
@@ -8,7 +8,6 @@ import { addAllProducts } from "../../redux/productReducer";
 export default function ProductsTable({category_id}) {
     const token = useSelector(state => state.user.user.token)
     const products = useSelector(state => state.user.product.products)
-    const [oneMadal, setOnaMadal] = useState(false)
     const dispatch = useDispatch()
 
     const getProducts = async () => {
@@ -29,7 +28,7 @@ export default function ProductsTable({category_id}) {
 
     useEffect(() => {
         getProducts()
-    }, [oneMadal])
+    }, [])
 
     if(!products.length){
         return(
@@ -68,7 +67,7 @@ export default function ProductsTable({category_id}) {
                                 return null;
                             }
                             return (
-                                <ProductItem key={item.id} item={item} oneMadal={oneMadal} setOneMadal={setOnaMadal}></ProductItem>
+                                <ProductItem key={item.id} item={item}></ProductItem>
                             )
                         })
                     }

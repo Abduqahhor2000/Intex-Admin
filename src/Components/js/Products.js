@@ -3,35 +3,28 @@ import { useEffect, useState } from "react";
 import ProductsTable from "./ProductsTable"
 import { Triangle  } from  'react-loader-spinner'
 import { useSelector, useDispatch } from "react-redux";
-import { https } from "../../axios";
 import AddProductMadal from "./madals/AddProductMadal";
 import { addAllCategories } from "../../redux/categoryReducer";
+import { getCategories } from "./fetching/getCategories";
 
 export default function Products() {
     const token = useSelector(state => state.user.user.token)
     const dispatch = useDispatch();
     const categories = useSelector(state => state.user.category.categories)
+    const trueCategory = useSelector(state => state.user.category?.categories[0]?.category_id)
     const [category_id, setCategory_id] = useState("");
     const [madal, setMadal] = useState(false)
-    console.log(category_id)
+    console.log(category_id, categories)
 
-    const getCategories = async () => {
-        try{
-            const {data} = await https({
-                method: 'get',
-                url: `/api/category`,
-                headers:{
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            dispatch(addAllCategories(data?.data))
-        }catch(err){
-            console.log(err)
+    useEffect(() => {
+        if((category_id === "") && trueCategory){
+            console.log(trueCategory)
+            setCategory_id(trueCategory);    
         }
-    }
+    })
 
     useEffect(()=>{
-        // getCategories()
+        getCategories(token, dispatch, addAllCategories)
     }, [madal])
 
     if(!categories.length){
@@ -70,13 +63,9 @@ export default function Products() {
                 <div className="table w-full pt-3">
                     <div className="product-type flex justify-center items-center mb-10">
                         {
-                            categories.map((item, index) => {
-                                let fix = false;
-                                if(category_id === "" && (index === 0)){
-                                    fix = true
-                                }
+                            categories.map((item) => {
                                 return(
-                                    <span key={item.category_id} className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${(category_id === item.category_id) || fix ? "active" : ""}`}
+                                    <span key={item.category_id} className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${(category_id === item.category_id) ? "active" : ""}`}
                                         onClick={() => setCategory_id(item.category_id)}
                                     >
                                         {item.name_ru}
@@ -86,14 +75,10 @@ export default function Products() {
                         }
                     </div>
                     {
-                        categories.map((item, index) => {
-                            let fix = false;
-                            if(category_id === "" && (index === 0)){
-                                fix = true
-                            }
+                        categories.map((item) => {
                             return(
                                 <div key={item.category_id}>
-                                    {(category_id === item.category_id) || fix ? <ProductsTable category_id={item.category_id} /> : null}
+                                    {category_id === item.category_id ? <ProductsTable category_id={item.category_id} /> : null}
                                 </div>
                             )
                         })

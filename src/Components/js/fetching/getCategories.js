@@ -7,7 +7,7 @@ export async function getCategories (token, dispatch, addAllCategories) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        dispatch(addAllCategories(data.data))
+        dispatch(addAllCategories(data?.data))
         console.log(data)
     }catch(err){
         console.log(err)
