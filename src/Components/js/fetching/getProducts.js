@@ -1,6 +1,7 @@
 import { https } from "../../../axios"
 
 export async function getProducts (token, dispatch, addAllProducts) {
+    if(!token) return;
     try{
         const {data} = await https({
             method: 'get',

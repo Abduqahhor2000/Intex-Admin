@@ -1,6 +1,7 @@
 import { https } from "../../../axios"
 
 export async function getSiteInfo (token, dispatch, addAllSiteInfo) {
+    if(!token) return;
     try{
         const {data} = await https({
             method: 'get',
