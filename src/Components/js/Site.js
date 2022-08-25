@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
 import { getSiteInfo } from "./fetching/getSiteInfo"
 import { addAllSiteInfo } from "../../redux/siteInfoReducer"
+import { useNavigate } from "react-router-dom"
 
 export default function Orders() {
     const token = useSelector(state => state.user.user.token)
@@ -12,9 +13,10 @@ export default function Orders() {
     const [typeInfo, setTypeInfo] = useState({})
     const siteInfo = useSelector(state => state.user.siteInfo.siteInfo)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(()=>{
-        getSiteInfo(token, dispatch, addAllSiteInfo)
+        getSiteInfo(token, dispatch, addAllSiteInfo, navigate)
     }, [typeMadal])
 
     if(!siteInfo.phone_number){

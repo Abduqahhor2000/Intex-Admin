@@ -1,6 +1,7 @@
 import "../scss/ProductsTable.scss"
 import { useEffect, useState } from "react";
 import ProductsTable from "./ProductsTable"
+import { useNavigate } from "react-router-dom"
 import { Triangle  } from  'react-loader-spinner'
 import { useSelector, useDispatch } from "react-redux";
 import AddProductMadal from "./madals/AddProductMadal";
@@ -14,6 +15,7 @@ export default function Products() {
     const trueCategory = useSelector(state => state.user.category?.categories[0]?.category_id)
     const [category_id, setCategory_id] = useState("");
     const [madal, setMadal] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if((category_id === "") && trueCategory){
@@ -22,7 +24,7 @@ export default function Products() {
     })
 
     useEffect(()=>{
-        getCategories(token, dispatch, addAllCategories)
+        getCategories(token, dispatch, addAllCategories, navigate)
     }, [madal])
 
     if(!categories.length){

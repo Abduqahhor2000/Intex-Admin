@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
 import { getCategories } from "./fetching/getCategories"
 import { addAllCategories } from "../../redux/categoryReducer"
+import { useNavigate } from  "react-router-dom"
 
 export default function Category() {
     const [categoryMadal, setCategoryMadal] = useState(false);
@@ -13,29 +14,10 @@ export default function Category() {
     const token = useSelector(state => state.user.user.token)
     const categories = useSelector(state=> state.user?.category?.categories)
     const dispatch = useDispatch()
-    
-    // const getCategory = async () => {
-    //     try{
-    //         if(!oneHand){
-    //             setIsLoading(true)
-    //         }
-    //         const {data} = await https.get("/api/category", 
-    //             {
-    //                 headers:{
-    //                     Authorization: `Bearer ${user.token}`,
-    //                 },
-    //             }
-    //         )
-    //         setCategories(data.data)
-    //         setIsLoading(false)
-    //         setOneHand(true)
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
+    const navigate = useNavigate();
 
     useEffect(()=>{
-        if(!categoryMadal){ getCategories(token, dispatch, addAllCategories) }
+        if(!categoryMadal){ getCategories(token, dispatch, addAllCategories, navigate) }
        
     }, [categoryMadal])
 

@@ -1,6 +1,7 @@
-import { https } from "../../../axios"
+import { https } from "../../../axios";
+import{removeUser} from "../../../redux/userReducer"
 
-export async function getCategories (token, dispatch, addAllCategories) {
+export async function getCategories (token, dispatch, addAllCategories, navigate) {
     if(!token) return; 
     try{
         const {data} = await https.get("/api/category", {
@@ -11,5 +12,9 @@ export async function getCategories (token, dispatch, addAllCategories) {
         dispatch(addAllCategories(data?.data))
     }catch(err){
         console.log(err)
+        if(err.response.status === 401){
+            dispatch(removeUser()); 
+            navigate("/login")
+        }
     }
 }

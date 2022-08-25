@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 import { delOneConsultation } from "../../../redux/consultationReducer"
+import { useNavigate } from  "react-router-dom"
+
 
 export default function ConsultationMadal({consulID, setConsulID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState(null)
     const dispatch = useDispatch()
-
-    // const autoClose = reqStatus === false ? setTimeout(() => {setSalesMadal(false)}, 4000) : null
-    // const autoCloseStop = () => {
-    //     clearTimeout(autoClose)
-    // }
+    const navigate = useNavigate()
 
     const deleteConsul = async () => {
         try{
@@ -30,6 +28,9 @@ export default function ConsultationMadal({consulID, setConsulID}) {
             setReqStatus(false)
         }catch(err){
             console.log(err)
+            if(err.response.status === 401){
+                navigate("/login")
+            }
         }
     }
     return (

@@ -6,15 +6,17 @@ import { getOrders } from "./fetching/getOrders"
 import { addAllOrders } from "../../redux/orderReducer"
 import SaleItem from "./containers/SaleItem"
 import SalesMadal from "./madals/SalesMadal"
+import { useNavigate } from "react-router-dom"
  
 export default function Sales () {
     const token = useSelector(state => state.user.user.token)
     const orders = useSelector(state => state.user.order.orders)
     const [saleID, setSaleID] = useState("")
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(()=>{
-        getOrders(token, dispatch, addAllOrders)
+        getOrders(token, dispatch, addAllOrders, navigate)
     }, [])
 
 

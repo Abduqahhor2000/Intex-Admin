@@ -44,6 +44,11 @@ export default function Login() {
         }catch(err){
             if(err.response.status === 404){
                 setPassword("")
+                setUserName("")
+            }
+            if(err.response.status === 400){
+                setPassword("")
+                setUserName("")
             }
             setResStatus(err.response.status)
             dispatch(removeUser())
@@ -62,7 +67,7 @@ export default function Login() {
                     INTEX-MARKET.UZ
                 </h1>
                 {
-                    resStatus === 404 ? <p className="text-center font-bolder text-xl text-red-500 mt-5 mb-16">Username yoki password xato!</p> : <p className="text-center font-bolder text-xl text-gray-400 mt-5 mb-9">Введите имя пользователя и пароль, чтобы получить доступ к системе.</p>
+                    resStatus === 404 ? <p className="text-center font-bolder text-xl text-red-500 mt-5 mb-16">Имя пользователя или пароль неверны!</p> :   resStatus === 400 ? <p className="text-center font-bolder text-xl text-red-500 mt-5 mb-9">Пожалуйста, не оставляйте пробел между логином и паролем!</p> :<p className="text-center font-bolder text-xl text-gray-400 mt-5 mb-9">Введите имя пользователя и пароль, чтобы получить доступ к системе.</p>
                 }
                 <input value={userName} maxLength={15} onChange={(e) =>{ setUserName(e.target.value); setResStatus(false);}} className={`w-full h-14 outline-none border-2 border-solid rounded-2xl pl-4 text-2xl text-center ${reqError && (userName.length < 4) ? "border-rose-600" : "mb-8 border-transparent"}`} placeholder="Имя пользователя" type="text" style={{"boxShadow": "0 0 7px 0 rgba(0, 0, 0, 0.25"}}/>
                 <span className={`w-10/12 pl-3 h-8 text-red-500 ${reqError && (userName.length < 4) ? "" : "hidden"}`}>Username 4ta belgidan kam bo'lmasligi kerak!</span>

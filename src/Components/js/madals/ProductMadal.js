@@ -9,11 +9,14 @@ import { baseURL } from "../../../axios"
 import { https } from "../../../axios"
 import "../../scss/productMadal.scss"
 import gr from "../../../img/Gr.png"
+import { useNavigate } from  "react-router-dom"
+
 
 
 export default function ProductMadal({setMadal, item}) {
     const token = useSelector(state => state.user.user.token)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const categories = useSelector(state => state.user.category.categories)
     const productStatus = useSelector(state => state.user.productStatus.productStatus)
     const [quantity, setQuantity] = useState(item.quantity)
@@ -120,17 +123,20 @@ export default function ProductMadal({setMadal, item}) {
             }))
         }catch(err){
             console.log(err)
+            if(err.response.status === 401){
+                navigate("/login")
+            }
         }
     }
 
     useEffect(()=>{
-        getCategories(token, dispatch, addAllCategories)
-        getProductStatus(token, dispatch, addProductStatus)
+        getCategories(token, dispatch, addAllCategories, navigate)
+        getProductStatus(token, dispatch, addProductStatus, navigate)
     },[token, dispatch])
 
     return (
         <>
-             <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
+            <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
             <div className="scrool absolute z-10 flex flex-col justify-between items-center top-0 bg-slate-100 p-12 pt-6 pb-9 rounded-3xl right-1/2 translate-x-1/2 top-10" style={{"width": "1130px"}}>
                 <span onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">

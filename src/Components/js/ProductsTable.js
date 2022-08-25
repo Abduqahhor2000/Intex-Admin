@@ -4,11 +4,13 @@ import { useEffect } from "react"
 import ProductItem from "./containers/ProductItem"
 import { https } from "../../axios"
 import { addAllProducts } from "../../redux/productReducer";
+import { useNavigate } from "react-router-dom"
 
 export default function ProductsTable({category_id}) {
     const token = useSelector(state => state.user.user.token)
     const products = useSelector(state => state.user.product.products)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const getProducts = async () => {
         try{
@@ -23,6 +25,9 @@ export default function ProductsTable({category_id}) {
             dispatch(addAllProducts(data.data))
         }catch(err){
             console.log(err)
+            if(err.response.status === 401){
+                navigate("/login")
+            }
         }
     }
 

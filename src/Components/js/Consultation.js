@@ -5,18 +5,18 @@ import { Triangle  } from  'react-loader-spinner'
 import { getConsultations } from "./fetching/getConsultations"
 import { addAllConsultations } from "../../redux/consultationReducer"
 import ConsultationItem from "./containers/ConsultationItem";
-
+import { useNavigate } from  "react-router-dom"
 
 export default function Consultation () {
     const token = useSelector(state => state.user.user.token)
     const consultations = useSelector(state => state.user.consultation?.consultations)
     const [consulID, setConsulID] = useState("")
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     
 
     useEffect(()=>{
-        getConsultations(token, dispatch, addAllConsultations)
+        getConsultations(token, dispatch, addAllConsultations, navigate)
     }, [])
 
     if(consultations.length === 0){

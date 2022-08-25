@@ -3,11 +3,13 @@ import { https } from "../../../axios"
 import { useSelector, useDispatch } from "react-redux"
 import { addAllOrders, updateOrder } from "../../../redux/orderReducer"
 import { getOrders } from "../fetching/getOrders"
+import { useNavigate } from  "react-router-dom"
 
 export default function SaleItem({item, setSaleID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState("")
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const updateSales = async () => {
         setReqStatus(item.order_id)
@@ -19,11 +21,14 @@ export default function SaleItem({item, setSaleID}) {
                     Authorization: `Bearer ${token}`,
                 },
             }).then(()=>{ 
-                getOrders(token, dispatch, addAllOrders); 
+                getOrders(token, dispatch, addAllOrders, navigate); 
                 dispatch(updateOrder({...item, status: !item.status}))
             }) 
         }catch(err) {
             console.log(err)
+            if(err.response.status === 401){
+                navigate("/login")
+            }
         }
         setReqStatus("")
     }

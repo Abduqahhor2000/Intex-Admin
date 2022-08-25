@@ -1,6 +1,7 @@
 import { https } from "../../../axios"
+import{removeUser} from "../../../redux/userReducer"
 
-export async function getProducts (token, dispatch, addAllProducts) {
+export async function getProducts (token, dispatch, addAllProducts, navigate) {
     if(!token) return;
     try{
         const {data} = await https({
@@ -14,5 +15,9 @@ export async function getProducts (token, dispatch, addAllProducts) {
         dispatch(addAllProducts(data?.data))
     }catch(err){
         console.log(err)
+        if(err.response.status === 401){
+            dispatch(removeUser()); 
+            navigate("/login")
+        }
     }
 }

@@ -3,11 +3,13 @@ import { https } from "../../../axios"
 import { useSelector, useDispatch } from "react-redux"
 import { addAllConsultations, updateConsultation } from "../../../redux/consultationReducer"
 import { getConsultations } from "../fetching/getConsultations"
+import { useNavigate } from  "react-router-dom"
 
 export default function ConsultationItem({item, setConsulID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState("")
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const updateConsul = async () => {
         setReqStatus(item.consultation_id)
@@ -19,11 +21,14 @@ export default function ConsultationItem({item, setConsulID}) {
                     Authorization: `Bearer ${token}`,
                 },
             }).then(()=> {
-                getConsultations(token, dispatch, addAllConsultations)
+                getConsultations(token, dispatch, addAllConsultations, navigate)
                 dispatch(updateConsultation({...item, status: !item.status}))
             })
         }catch(err){
             console.log(err)
+            if(err.response.status === 401){
+                navigate("/login")
+            }
         }
         setReqStatus("")
     }

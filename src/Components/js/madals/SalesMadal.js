@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 import { delOneOrder } from "../../../redux/orderReducer"
+import { useNavigate } from  "react-router-dom"
+
 
 export default function SalesMadal({saleID, setSaleID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState(null)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
+
 
     const deleteOrder = async () => {
         try{
@@ -23,12 +27,12 @@ export default function SalesMadal({saleID, setSaleID}) {
             dispatch(delOneOrder({
                 order_id: saleID
             }))
-            // setTimeout(() => {
-            //     if(oneID === saleID) setSaleID("");
-            // }, 4000)
             setReqStatus(false)
         }catch(err){
             console.log(err)
+            if(err.response.status === 401){
+                navigate("/login")
+            }
         }
     }
     return (

@@ -25,12 +25,12 @@ export default function MeanSection() {
     const dispatch = useDispatch();
 
     function start() {
-        getConsultations(token, dispatch, addAllConsultations)
-        getProducts(token, dispatch, addAllProducts)
-        getOrders(token, dispatch, addAllOrders)
-        getCategories(token, dispatch, addAllCategories)
-        getSiteInfo(token, dispatch, addAllSiteInfo)
-        getProductStatus(token, dispatch, addProductStatus)
+        getConsultations(token, dispatch, addAllConsultations, navigate)
+        getProducts(token, dispatch, addAllProducts, navigate)
+        getOrders(token, dispatch, addAllOrders, navigate)
+        getCategories(token, dispatch, addAllCategories, navigate)
+        getSiteInfo(token, dispatch, addAllSiteInfo, navigate)
+        getProductStatus(token, dispatch, addProductStatus, navigate)
         setTimer(new Date().getTime())
     }
 
