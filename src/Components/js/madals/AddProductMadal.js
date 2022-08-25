@@ -10,7 +10,6 @@ import { addProductStatus } from "../../../redux/productStatusReducer"
 import { addOneProduct } from "../../../redux/productReducer"
 import { baseURL } from "../../../axios"
 
-
 export default function AddProductMadal({setMadal}) {
     const token = useSelector(state => state.user.user.token)
     const categories = useSelector(state => state.user.category.categories)
@@ -30,40 +29,6 @@ export default function AddProductMadal({setMadal}) {
     const [statusReq, setStatusReq] = useState(null)
     const [notRequer, setNotRequer] = useState(false)
     const dispatch = useDispatch()
-
-    // const getCategories = async () => {
-    //     try{
-    //         const data = await https({
-    //             method: "get",
-    //             url: "api/category",
-    //             headers:{
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-
-    //         setCategories(data?.data?.data)
-    //         setCategoryId(data?.data?.data[0].category_id)
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
-    
-    // const getProductStatus = async () => {
-    //     try{
-    //         const data = await https({
-    //             method: "get",
-    //             url: "api/product/status/info",
-    //             headers:{
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-
-    //         setProductStatus(data?.data?.data)
-    //         setStatusId(data?.data?.data[0].id)
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
@@ -181,7 +146,6 @@ export default function AddProductMadal({setMadal}) {
                                 <select value={categoryId} onChange={(e)=>{setCategoryId(e.target.value)}} className="w-96 h-12 text-3xl text-slate-600 bg-transparent cursor-pointer border-b-2 border-solid border-slate-600">
                                     {
                                         categories.map(item => {
-                                            console.log(item, categoryId)
                                             return (
                                                 <option value={item.category_id}>{item.name_ru}</option>
                                             )

@@ -14,11 +14,9 @@ export default function Products() {
     const trueCategory = useSelector(state => state.user.category?.categories[0]?.category_id)
     const [category_id, setCategory_id] = useState("");
     const [madal, setMadal] = useState(false)
-    console.log(category_id, categories)
 
     useEffect(() => {
         if((category_id === "") && trueCategory){
-            console.log(trueCategory)
             setCategory_id(trueCategory);    
         }
     })

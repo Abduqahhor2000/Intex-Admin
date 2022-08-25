@@ -4,15 +4,10 @@ import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 import { delOneOrder } from "../../../redux/orderReducer"
 
-export default function SalesMadal({setSalesMadal, saleID}) {
+export default function SalesMadal({saleID, setSaleID}) {
     const token = useSelector(state => state.user.user.token)
     const [reqStatus, setReqStatus] = useState(null)
     const dispatch = useDispatch()
-
-    // const autoClose = reqStatus === false ? setTimeout(() => {setSalesMadal(false)}, 4000) : null
-    // const autoCloseStop = () => {
-    //     clearTimeout(autoClose)
-    // }
 
     const deleteOrder = async () => {
         try{
@@ -28,6 +23,9 @@ export default function SalesMadal({setSalesMadal, saleID}) {
             dispatch(delOneOrder({
                 order_id: saleID
             }))
+            // setTimeout(() => {
+            //     if(oneID === saleID) setSaleID("");
+            // }, 4000)
             setReqStatus(false)
         }catch(err){
             console.log(err)
@@ -35,9 +33,9 @@ export default function SalesMadal({setSalesMadal, saleID}) {
     }
     return (
         <>
-            <div onClick={()=>{ setSalesMadal(false)}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
+            <div onClick={()=>{setSaleID("");}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
             <div className="fixed z-10 flex flex-col justify-between items-center w-2/3 h-96 bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 bg-slate-100 p-12 pt-6 rounded-3xl">
-                <span onClick={() =>{ setSalesMadal(false)}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
+                <span onClick={() =>{setSaleID("");}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 -0.685636 0.727944 0.685636 0.00292969 28.5811)" fill="#B9B9B9"/>
@@ -52,7 +50,7 @@ export default function SalesMadal({setSalesMadal, saleID}) {
                         </div>
                         <div className="flex justify-around w-full">
                             <span onClick={()=> {deleteOrder()}} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Da</span>
-                            <span onClick={()=> setSalesMadal(false)} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgb(152, 0, 147)"}}>Net</span>   
+                            <span onClick={()=>{setSaleID("");}} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgb(152, 0, 147)"}}>Net</span>   
                         </div>
                     </> :
                     <div className="flex flex-col items-center">

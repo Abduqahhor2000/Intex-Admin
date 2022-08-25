@@ -32,39 +32,6 @@ export default function ProductMadal({setMadal, item}) {
     const [statusReq, setStatusReq] = useState(null)
     const [notRequer, setNotRequer] = useState(false)
 
-    // const getCategories = async () => {
-    //     try{
-    //         const data = await https({
-    //             method: "get",
-    //             url: "api/category",
-    //             headers:{
-    //                 Authorization: `Bearer ${token}`,
-    //             },
-    //         })
-
-    //         setCategories(data?.data?.data)
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
-    
-    // const getProductStatus = async () => {
-    //     try{
-    //         const data = await https({
-    //             method: "get",
-    //             url: "api/product/status/info",
-    //             headers:{
-    //                 Authorization: `Bearer ${token}`,
-    //                 'Content-Type': 'application/json'
-    //             },
-    //         })
-
-    //         setProductStatus(data?.data?.data)
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
-
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
@@ -143,7 +110,7 @@ export default function ProductMadal({setMadal, item}) {
                 size,
                 depth,
                 category_id: categoryId,
-                image: `${baseURL}${data?.data[0]?.image}`,
+                image: `${baseURL}/${data?.data[0]?.image}`,
                 sale_price: salePrice,
                 frame_ru: frameRu,
                 frame_uz: frameUz,
@@ -196,7 +163,6 @@ export default function ProductMadal({setMadal, item}) {
                                 <select value={categoryId} onChange={(e)=>{setCategoryId(e.target.value)}} className="w-96 h-12 text-3xl text-slate-600 bg-transparent cursor-pointer border-b-2 border-solid border-slate-600">
                                     {
                                         categories.map(item => {
-                                            // console.log(item, categoryId)
                                             return (
                                                 <option key={item.category_id} value={item.category_id}>{item.name_ru}</option>
                                             )
@@ -231,7 +197,7 @@ export default function ProductMadal({setMadal, item}) {
                                     <path d="M26.7654 0.5625H2.87677C2.3008 0.5625 1.74842 0.832903 1.34115 1.31422C0.933881 1.79555 0.705078 2.44836 0.705078 3.12905V26.228C0.705078 26.9087 0.933881 27.5615 1.34115 28.0428C1.74842 28.5241 2.3008 28.7945 2.87677 28.7945H26.7654C27.3414 28.7945 27.8938 28.5241 28.301 28.0428C28.7083 27.5615 28.9371 26.9087 28.9371 26.228V3.12905C28.9371 2.44836 28.7083 1.79555 28.301 1.31422C27.8938 0.832903 27.3414 0.5625 26.7654 0.5625ZM9.39186 24.9447H5.04847C4.76048 24.9447 4.4843 24.8095 4.28066 24.5689C4.07702 24.3282 3.96262 24.0018 3.96262 23.6614V18.5283C3.96262 18.188 4.07702 17.8616 4.28066 17.6209C4.4843 17.3803 4.76048 17.2451 5.04847 17.2451C5.33645 17.2451 5.61264 17.3803 5.81628 17.6209C6.01992 17.8616 6.13432 18.188 6.13432 18.5283V22.3782H9.39186C9.67985 22.3782 9.95604 22.5134 10.1597 22.754C10.3633 22.9947 10.4777 23.3211 10.4777 23.6614C10.4777 24.0018 10.3633 24.3282 10.1597 24.5689C9.95604 24.8095 9.67985 24.9447 9.39186 24.9447ZM25.6796 10.8287C25.6796 11.169 25.5652 11.4954 25.3615 11.7361C25.1579 11.9768 24.8817 12.112 24.5937 12.112C24.3057 12.112 24.0296 11.9768 23.8259 11.7361C23.6223 11.4954 23.5079 11.169 23.5079 10.8287V6.97887H20.2503C19.9624 6.97887 19.6862 6.84367 19.4825 6.60301C19.2789 6.36235 19.1645 6.03594 19.1645 5.6956C19.1645 5.35525 19.2789 5.02885 19.4825 4.78819C19.6862 4.54753 19.9624 4.41232 20.2503 4.41232H24.5937C24.8817 4.41232 25.1579 4.54753 25.3615 4.78819C25.5652 5.02885 25.6796 5.35525 25.6796 5.6956V10.8287Z" fill="#545454"/>
                                 </svg>
                                 <label className="text-2xl text-slate-400">Рамка <span className="text-red-500">*</span> </label>
-                                <input value={frameRu} maxlength={50} onChange={(e)=>{setFrameRu(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (frameRu.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
+                                <input value={frameRu} maxLength={50} onChange={(e)=>{setFrameRu(e.target.value)}} type="text" className={`w-96 h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid ${(notRequer && (frameRu.length < 1)) ? "border-red-500" : "border-slate-600"}`}/>
                             </div>
                             <div className="relative flex flex-col pl-10 mx-5 mb-3">
                                 <svg className="absolute left-0 bottom-2" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
@@ -263,7 +229,7 @@ export default function ProductMadal({setMadal, item}) {
                                     {
                                         productStatus.map(item => {
                                             return (
-                                                <option value={item.id}>{item.name_ru}</option>
+                                                <option key={item.id} value={item.id}>{item.name_ru}</option>
                                             )
                                         })
                                     }
@@ -276,7 +242,7 @@ export default function ProductMadal({setMadal, item}) {
                                 <input value={equipmentUz} maxLength={150} onChange={(e)=>{setEquipmentUz(e.target.value)}} type="text" placeholder="Комплектация на узбекском" className="w-full h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid border-slate-600"/>
                             </div>
                         </div>
-                        <div onClick={()=>{editProduct()}} className="w-60 rounded-3xl text-white text-2xl text-center pt-1.5 pb-1.5 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>Добавить</div>
+                        <div onClick={()=>{editProduct()}} className="w-60 rounded-3xl text-white text-2xl text-center pt-1.5 pb-1.5 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>Обновить</div>
                     </> : 
                     <>
                         <div className="flex flex-col items-center">
