@@ -25,11 +25,12 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "build": "npm run build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "install-client": "npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "nodemon server",
-    "client": "npm start",
+    "client": "npm run start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
@@ -52,10 +53,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
-    "concurrently": "^7.3.0",
     "gh-pages": "^4.0.0",
-    "nodemon": "^2.0.19",
     "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8"
+    "tailwindcss": "^3.1.8",
+    "nodemon": "^2.0.19"
   }
 }
