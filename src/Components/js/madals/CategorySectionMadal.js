@@ -120,6 +120,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                                         <input 
                                             value={nameRu} 
                                             onChange={(e)=> setNameRu(e.target.value)}
+                                            maxLength={20}
                                             className="text-black outline-none w-full h-9 mt-2.5 border-b-2 border-slate-400 px-3"
                                             type="text"/>     
                                         <span className="absolute block right-full bottom-4 mr-2">{inputIcon}</span>  
@@ -128,6 +129,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                                         <input 
                                             value={nameUz} 
                                             onChange={(e)=> setNameUz(e.target.value)}
+                                            maxLength={20}
                                             className="text-black outline-none w-full h-9 mt-2.5 border-b-2 border-slate-400 px-3" 
                                             type="text"/>     
                                         <span className="absolute block right-full bottom-4 mr-2">{inputIcon}</span>  

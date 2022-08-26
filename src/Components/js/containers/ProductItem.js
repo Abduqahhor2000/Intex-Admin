@@ -17,7 +17,7 @@ export default function ProductItem({item}) {
                     <span className="text-base font-bold">{item.sale_price} сум</span>
                 </td>
                 <td className="py-1.5">{item.quantity}</td>
-                <td className="py-1.5">{item.category_name_ru}</td>
+                <td className="py-1.5">{item.frame_ru}</td>
                 <td className="py-1.5">{item.size}</td>
                 <td className="py-1.5">{item.depth}</td>
                 <td className="py-1.5 rounded-r-3xl">

@@ -13,10 +13,10 @@ import Login from './Components/js/Login';
 import ErrorPage from "./Components/js/ErrorPage"
 
 function App() {
-
+  const basename = process.env.REACT_APP_BASENAME || null;
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename={basename}>
         <Routes>
           <Route path="/" element={<MeanSection/>}>
             <Route path="/orders" element={<Orders/>}></Route>
