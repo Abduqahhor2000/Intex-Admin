@@ -1,7 +1,7 @@
 import './App.css';
 import MeanSection from './Components/js/MeanSection';
 import {
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
 } from "react-router-dom";
@@ -13,10 +13,9 @@ import Login from './Components/js/Login';
 import ErrorPage from "./Components/js/ErrorPage"
 
 function App() {
-  const basename = process.env.REACT_APP_BASENAME || null;
   return (
     <div className="App">
-      <BrowserRouter basename={basename}>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<MeanSection/>}>
             <Route path="/orders" element={<Orders/>}></Route>
@@ -27,7 +26,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/error" element={<ErrorPage/>}/>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
