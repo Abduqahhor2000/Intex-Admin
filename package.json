@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": ".",
   "private": true,
+  "main": "server.js",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.14.1",
@@ -32,6 +33,10 @@
     "server": "nodemon server",
     "client": "npm run start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abduqahhor2000/intex-admin.git"
   },
   "eslintConfig": {
     "extends": [
