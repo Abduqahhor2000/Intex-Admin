@@ -15,6 +15,7 @@ export default function Products() {
     const trueCategory = useSelector(state => state.user.category?.categories[0]?.category_id)
     const [category_id, setCategory_id] = useState("");
     const [madal, setMadal] = useState(false)
+    const [oneHand, setOneHand] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -78,13 +79,13 @@ export default function Products() {
                         categories.map((item) => {
                             return(
                                 <div key={item.category_id}>
-                                    {category_id === item.category_id ? <ProductsTable category_id={item.category_id} /> : null}
+                                    {category_id === item.category_id ? <ProductsTable oneHand={oneHand} category_id={item.category_id} /> : null}
                                 </div>
                             )
                         })
                     }
                     {
-                        madal ? <AddProductMadal setMadal={setMadal} /> : null
+                        madal ? <AddProductMadal setOneHand={setOneHand} oneHand={oneHand} setMadal={setMadal} /> : null
                     }
                 </div>
             </div>

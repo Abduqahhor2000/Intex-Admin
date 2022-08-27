@@ -11,7 +11,7 @@ import { addOneProduct } from "../../../redux/productReducer"
 import { baseURL } from "../../../axios"
 import { useNavigate } from  "react-router-dom"
 
-export default function AddProductMadal({setMadal}) {
+export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
     const token = useSelector(state => state.user.user.token)
     const categories = useSelector(state => state.user.category.categories)
     const productStatus = useSelector(state => state.user.productStatus.productStatus)
@@ -103,6 +103,7 @@ export default function AddProductMadal({setMadal}) {
                 equipment_ru: equipmentRu,                                                                                                                                              
             }))
             setStatusReq("complate")
+            setOneHand(!oneHand)
         }catch(err){
             console.log(err)
             if(err.response.status === 401){

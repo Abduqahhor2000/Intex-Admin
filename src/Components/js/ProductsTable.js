@@ -6,7 +6,7 @@ import { https } from "../../axios"
 import { addAllProducts } from "../../redux/productReducer";
 import { useNavigate } from "react-router-dom"
 
-export default function ProductsTable({category_id}) {
+export default function ProductsTable({category_id, oneHand}) {
     const token = useSelector(state => state.user.user.token)
     const products = useSelector(state => state.user.product.products)
     const dispatch = useDispatch()
