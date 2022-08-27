@@ -21,21 +21,21 @@ export default function Category() {
        
     }, [categoryMadal])
 
-    if(categories.length === 0){
-        return(
-            <div style={{"width": "300px"}} className="mx-auto mt-40" >
-                <Triangle 
-                    height = "300"
-                    width = "300"
-                    radius = "9"
-                    color = '#009398'
-                    ariaLabel = 'three-dots-loading'     
-                    wrapperStyle
-                    wrapperClass
-                />
-            </div>
-        )
-    }
+    // if(categories.length === 0){
+    //     return(
+    //         <div style={{"width": "300px"}} className="mx-auto mt-40" >
+    //             <Triangle 
+    //                 height = "300"
+    //                 width = "300"
+    //                 radius = "9"
+    //                 color = '#009398'
+    //                 ariaLabel = 'three-dots-loading'     
+    //                 wrapperStyle
+    //                 wrapperClass
+    //             />
+    //         </div>
+    //     )
+    // }
 
     return(
         <>

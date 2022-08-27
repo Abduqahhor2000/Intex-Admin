@@ -145,7 +145,7 @@ export default function ProductMadal({setMadal, item}) {
                     </svg>
                 </span>
                 {
-                    statusReq === null ? 
+                    statusReq !== "complate" ? 
                     <>
                         <div className={`relative h-80 flex flex-col cursor-pointer bg-slate-50 justify-center rounded-3xl shadow-lg border-2 border-dashed mb-6 mt-4 ${(notRequer && (productImage.length < 1)) ? "border-red-500" : "border-slate-400"}`}  style={{"width": "690px"}}>
                             <input onChange={(e) => {uploadImage(e);}} type="file" className="uploadfile absolute w-full h-full cursor-pointer"/>
@@ -248,11 +248,20 @@ export default function ProductMadal({setMadal, item}) {
                                 <input value={equipmentUz} maxLength={150} onChange={(e)=>{setEquipmentUz(e.target.value)}} type="text" placeholder="Комплектация на узбекском" className="w-full h-12 text-3xl text-slate-600 outline-none border-b-2 border-solid border-slate-600"/>
                             </div>
                         </div>
-                        <div onClick={()=>{editProduct()}} className="w-60 rounded-3xl text-white text-2xl text-center pt-1.5 pb-1.5 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>Обновить</div>
+                        {
+                            statusReq === "active" ? <div className="block flex justify-center w-60 rounded-3xl text-white text-2xl text-center py-3 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>
+                                                        <svg className="animate-spin -ml-1 mr-3 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                        </svg>
+                                                     </div>
+                                                   : <div onClick={()=>{editProduct()}} className="w-60 rounded-3xl text-white text-2xl text-center pt-1.5 pb-1.5 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>Обновить</div>
+                        }
+                        
                     </> : 
                     <>
                         <div className="flex flex-col items-center">
-                            <img className={`grayscale duration-300 w-40 ${ statusReq !== "active" ? "grayscale-0" : ""}`} src={gr} alt=""/> 
+                            <img className={`grayscale duration-300 w-40 ${ statusReq === "complate" ? "grayscale-0" : ""}`} src={gr} alt=""/> 
                             <h2 className="text-5xl font-bolder mb-10">Спасибо!</h2>
                             <p className="text-2xl font-middle">Продукт был обновлен.</p>
                         </div>

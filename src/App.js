@@ -24,7 +24,8 @@ function App() {
             <Route path="/products" element={<Products/>}></Route>
           </Route>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/error" element={<ErrorPage/>}/>
+          {/* <Route path="/error" element={<ErrorPage/>}/> */}
+          <Route path="*" element={<ErrorPage/>}/>
         </Routes>
       </HashRouter>
     </div>
