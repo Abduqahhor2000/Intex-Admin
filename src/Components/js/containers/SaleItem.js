@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { addAllOrders, updateOrder } from "../../../redux/orderReducer"
 import { getOrders } from "../fetching/getOrders"
 import { useNavigate } from  "react-router-dom"
+import { timeConvert } from "../function/timeConvert"
+import {numberConvert} from "../function/nuberConvert"
 
 export default function SaleItem({item, setSaleID}) {
     const token = useSelector(state => state.user.user.token)
@@ -41,12 +43,12 @@ export default function SaleItem({item, setSaleID}) {
                 <td className="">
                     <img src={item.image} crossOrigin="anonymous" alt="" className="h-16"></img>
                 </td>
-                <td className="py-1.5">{item.size}</td>
-                <td className="py-1.5">{item.price} sum</td>
-                <td className="py-1.5">
+                <td className="py-1.5 px-3">{item.size}</td>
+                <td className="py-1.5">{numberConvert(item.price)}</td>
+                <td className="py-1.5 text-base">
                     <span className="w-48 block">{item.address}</span>
                 </td>
-                <td className="py-1.5">{item.time_order}</td>
+                <td className="py-1.5">{timeConvert(item.time_order)}</td>
                 <td className="py-1.5 rounded-r-3xl">
                     <div className="flex">
                         {

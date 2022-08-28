@@ -66,7 +66,7 @@ export default function Products() {
                         {
                             categories.map((item) => {
                                 return(
-                                    <span key={item.category_id} className={`type cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${(category_id === item.category_id) ? "active" : ""}`}
+                                    <span key={item.category_id} className={`type cursor-pointer text-3xl ml-5 py-4 font-bold text-center ${(category_id === item.category_id) ? "active" : ""}`}
                                         onClick={() => setCategory_id(item.category_id)}
                                     >
                                         {item.name_ru}

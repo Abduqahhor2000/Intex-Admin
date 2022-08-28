@@ -4,6 +4,7 @@ import { delOneProduct } from "../../../redux/productReducer"
 import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 import { useNavigate } from  "react-router-dom"
+import{removeUser} from "../../../redux/userReducer"
 
 
 export default function DelProductMadal({productID, setProductID}) {
@@ -28,7 +29,11 @@ export default function DelProductMadal({productID, setProductID}) {
         }catch(err){
             console.log(err)
             if(err.response.status === 401){
+                dispatch(removeUser());
                 navigate("/login")
+            }
+            if(err.response.status === 0){
+                navigate("/noconnect")
             }
         }
     }

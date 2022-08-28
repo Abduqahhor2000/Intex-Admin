@@ -18,5 +18,8 @@ export async function getOrders (token, dispatch, addAllOrders, navigate) {
             dispatch(removeUser()); 
             navigate("/login")
         }
+        if(err.response.status === 0){
+            navigate("/noconnect")
+        }
     }
 }

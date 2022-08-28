@@ -10,6 +10,7 @@ import { addProductStatus } from "../../../redux/productStatusReducer"
 import { addOneProduct } from "../../../redux/productReducer"
 import { baseURL } from "../../../axios"
 import { useNavigate } from  "react-router-dom"
+import{removeUser} from "../../../redux/userReducer"
 
 export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
     const token = useSelector(state => state.user.user.token)
@@ -107,7 +108,11 @@ export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
         }catch(err){
             console.log(err)
             if(err.response.status === 401){
+                dispatch(removeUser());
                 navigate("/login")
+            }
+            if(err.response.status === 0){
+                navigate("/noconnect")
             }
         }
     }

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import DelProductMadal from "../madals/DelProductMadal"
 import ProductMadal from "../madals/ProductMadal"
+import { numberConvert } from "../function/nuberConvert"
 
 export default function ProductItem({item}) {
     const [madal, setMadal] = useState(false)
@@ -13,10 +14,10 @@ export default function ProductItem({item}) {
                    <img src={item.image} crossOrigin="anonymous" className="h-16 w-auto ml-10" alt="img"></img>
                 </td>
                 <td className="py-2 flex flex-col justify-center">
-                    <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{item.price} сум</span>
-                    <span className="text-base font-bold">{item.sale_price} сум</span>
+                    <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{numberConvert(item.price)} сум</span>
+                    <span className="text-base font-bold">{numberConvert(item.sale_price)} сум</span>
                 </td>
-                <td className="py-1.5">{item.quantity}</td>
+                <td className="py-1.5">{numberConvert(item.quantity)}</td>
                 <td className="py-1.5">{item.frame_ru}</td>
                 <td className="py-1.5">{item.size}</td>
                 <td className="py-1.5">{item.depth}</td>

@@ -20,5 +20,8 @@ export async function getProductStatus (token, dispatch, addProductStatus, navig
             dispatch(removeUser()); 
             navigate("/login")
         }
+        if(err.response.status === 0){
+            navigate("/noconnect")
+        }
     }
 }

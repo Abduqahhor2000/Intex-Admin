@@ -16,5 +16,8 @@ export async function getCategories (token, dispatch, addAllCategories, navigate
             dispatch(removeUser()); 
             navigate("/login")
         }
+        if(err.response.status === 0){
+            navigate("/noconnect")
+        }
     }
 }

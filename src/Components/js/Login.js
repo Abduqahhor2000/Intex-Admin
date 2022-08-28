@@ -50,6 +50,9 @@ export default function Login() {
                 setPassword("")
                 setUserName("")
             }
+            if(err.response.status === 0){
+                navigate("/noconnect")
+            }
             setResStatus(err.response.status)
             dispatch(removeUser())
         }

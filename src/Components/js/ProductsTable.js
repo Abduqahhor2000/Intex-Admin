@@ -5,6 +5,7 @@ import ProductItem from "./containers/ProductItem"
 import { https } from "../../axios"
 import { addAllProducts } from "../../redux/productReducer";
 import { useNavigate } from "react-router-dom"
+import{removeUser} from "../../redux/userReducer"
 
 export default function ProductsTable({category_id, oneHand}) {
     const token = useSelector(state => state.user.user.token)
@@ -26,14 +27,18 @@ export default function ProductsTable({category_id, oneHand}) {
         }catch(err){
             console.log(err)
             if(err.response.status === 401){
+                dispatch(removeUser());
                 navigate("/login")
+            }
+            if(err.response.status === 0){
+                navigate("/noconnect")
             }
         }
     }
 
     useEffect(() => {
         getProducts()
-    }, [])
+    }, [oneHand])
 
     if(!products.length){
         return(
@@ -56,13 +61,13 @@ export default function ProductsTable({category_id, oneHand}) {
             <table className="w-full border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left">
                     <tr>
-                        <th className="py-5 rounded-l-3xl pl-11">Изображение</th>
-                        <th className="py-5">Цена(сум)</th>
-                        <th className="py-5">Количество</th>
-                        <th className="py-5">Рамка</th>
-                        <th className="py-5">Размер(м)</th>
-                        <th className="py-5">Глубина(см)</th>
-                        <th className="py-5 rounded-r-3xl">Действия</th>
+                        <td className="py-5 rounded-l-3xl pl-11">Изображение</td>
+                        <td className="py-5">Цена(сум)</td>
+                        <td className="py-5">Количество</td>
+                        <td className="py-5">Рамка</td>
+                        <td className="py-5">Размер(м)</td>
+                        <td className="py-5">Глубина(см)</td>
+                        <td className="py-5 rounded-r-3xl">Действия</td>
                     </tr>
                 </thead>
                 <tbody>

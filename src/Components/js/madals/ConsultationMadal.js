@@ -4,6 +4,7 @@ import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 import { delOneConsultation } from "../../../redux/consultationReducer"
 import { useNavigate } from  "react-router-dom"
+import{removeUser} from "../../../redux/userReducer"
 
 
 export default function ConsultationMadal({consulID, setConsulID}) {
@@ -29,7 +30,11 @@ export default function ConsultationMadal({consulID, setConsulID}) {
         }catch(err){
             console.log(err)
             if(err.response.status === 401){
+                dispatch(removeUser());
                 navigate("/login")
+            }
+            if(err.response.status === 0){
+                navigate("/noconnect")
             }
         }
     }

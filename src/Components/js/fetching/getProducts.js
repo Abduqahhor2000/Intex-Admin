@@ -19,5 +19,8 @@ export async function getProducts (token, dispatch, addAllProducts, navigate) {
             dispatch(removeUser()); 
             navigate("/login")
         }
+        if(err.response.status === 0){
+            navigate("/noconnect")
+        }
     }
 }

@@ -4,7 +4,7 @@ import { https } from "../../../axios"
 import gr from "../../../img/Gr.png"
 import { delOneOrder } from "../../../redux/orderReducer"
 import { useNavigate } from  "react-router-dom"
-
+import{removeUser} from "../../../redux/userReducer"
 
 export default function SalesMadal({saleID, setSaleID}) {
     const token = useSelector(state => state.user.user.token)
@@ -31,7 +31,11 @@ export default function SalesMadal({saleID, setSaleID}) {
         }catch(err){
             console.log(err)
             if(err.response.status === 401){
+                dispatch(removeUser());
                 navigate("/login")
+            }
+            if(err.response.status === 0){
+                navigate("/noconnect")
             }
         }
     }

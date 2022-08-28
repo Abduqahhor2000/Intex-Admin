@@ -10,8 +10,7 @@ import { https } from "../../../axios"
 import "../../scss/productMadal.scss"
 import gr from "../../../img/Gr.png"
 import { useNavigate } from  "react-router-dom"
-
-
+import{removeUser} from "../../../redux/userReducer"
 
 export default function ProductMadal({setMadal, item}) {
     const token = useSelector(state => state.user.user.token)
@@ -124,7 +123,11 @@ export default function ProductMadal({setMadal, item}) {
         }catch(err){
             console.log(err)
             if(err.response.status === 401){
+                dispatch(removeUser());
                 navigate("/login")
+            }
+            if(err.response.status === 0){
+                navigate("/noconnect")
             }
         }
     }

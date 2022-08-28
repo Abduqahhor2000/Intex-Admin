@@ -18,5 +18,8 @@ export async function getSiteInfo (token, dispatch, addAllSiteInfo, navigate) {
             dispatch(removeUser()); 
             navigate("/login")
         }
+        if(err.response.status === 0){
+            navigate("/noconnect")
+        }
     }
 }

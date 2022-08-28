@@ -18,5 +18,8 @@ export async function getConsultations (token, dispatch, addAllConsultations, na
             dispatch(removeUser()); 
             navigate("/login")
         }
+        if(err.response.status === 0){
+            navigate("/noconnect")
+        }
     }
 }

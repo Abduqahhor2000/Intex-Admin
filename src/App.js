@@ -10,7 +10,8 @@ import Orders from "./Components/js/Orders"
 import Category from "./Components/js/Category"
 import Site from "./Components/js/Site"
 import Login from './Components/js/Login';
-import ErrorPage from "./Components/js/ErrorPage"
+import NoConnectPage from "./Components/js/NoConnectPage"
+import NotFoundPage from "./Components/js/NotFoundPage"
 
 function App() {
   return (
@@ -24,8 +25,8 @@ function App() {
             <Route path="/products" element={<Products/>}></Route>
           </Route>
           <Route path="/login" element={<Login/>}/>
-          {/* <Route path="/error" element={<ErrorPage/>}/> */}
-          <Route path="*" element={<ErrorPage/>}/>
+          <Route path="/noconnect" element={<NoConnectPage/>}/>
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </HashRouter>
     </div>
