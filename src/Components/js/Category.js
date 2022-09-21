@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CategorySectionMadal from "./madals/CategorySectionMadal";
 import { useDispatch, useSelector } from "react-redux";
-import { Triangle  } from  'react-loader-spinner'
+// import { Triangle  } from  'react-loader-spinner'
 import { getCategories } from "./fetching/getCategories"
 import { addAllCategories } from "../../redux/categoryReducer"
 import { useNavigate } from  "react-router-dom"
