@@ -41,7 +41,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
             setStatusReq("complate")
         }catch(err){
             console.log(err)
-            if(err.response.status === 401){
+            if(err.response.status === 401){ 
                 navigate("/login")
             }
         }
@@ -107,7 +107,7 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
 
     return(
         <>
-            <div onClick={()=>{ setCategoryMadal(false); setNameRu(""); setNameUz("")}} className={`fixed top-0 z-10 left-0 w-screen h-screen`} style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
+            <div onClick={()=>{ setCategoryMadal(false); setNameRu(""); setNameUz("")}} className={`fixed top-0 z-10 left-0 w-screen h-screen bg-black-02 backdrop-blur`}></div>
             <div className={`fixed z-10 flex flex-col justify-between items-center w-2/3 h-96 bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 bg-slate-100 p-12 pt-6 rounded-3xl`}>
                 <span onClick={() =>{ setCategoryMadal(false);  setNameRu(""); setNameUz("")}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
@@ -120,8 +120,8 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                         <>  { statusReq !== "complate" ? 
                             <>
                                 {
-                                    id === null ? <h2 className="text-5xl" style={{"color": "#009398"}}>Добавить категории</h2>
-                                                : <h2 className="text-5xl" style={{"color": "#009398"}}>Обновить категории</h2>
+                                    id === null ? <h2 className="text-5xl text-blue-green">Добавить категории</h2>
+                                                : <h2 className="text-5xl text-blue-green">Обновить категории</h2>
                                 }
                                 <div className="w-full flex justify-around">
                                     <label className="relative text-xl w-96 text-gray-500 pb-5">Название<br/>
@@ -144,14 +144,14 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                                     </label>
                                 </div>
                                 {
-                                    statusReq === "active"  ? <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-3" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>
+                                    statusReq === "active"  ? <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-3 bg-blue-green">
                                                                 <svg className="animate-spin -ml-1 mr-3 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                                 </svg>
                                                              </span> : 
-                                    id === null  ?  <span onClick={() =>{ addCategory() }} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Создавать</span>
-                                                 : <span onClick={() =>{ editCategory() }} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Изменить</span>
+                                    id === null  ?  <span onClick={() =>{ addCategory() }} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5 bg-blue-green">Создавать</span>
+                                                 : <span onClick={() =>{ editCategory() }} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5 bg-blue-green">Изменить</span>
                                 }
                                      
                             </> :
@@ -167,21 +167,21 @@ export default function CategorySectionMadal({categoryMadal, setCategoryMadal, n
                         </> : 
                         <>{
                             statusReq !== "complate" ? <> 
-                                <h2 className="text-5xl" style={{"color": "#009398"}}>Действия</h2>
+                                <h2 className="text-5xl text-blue-green">Действия</h2>
                                 <div className="w-full flex justify-center">
                                     <span className="text-2xl">Вы уверены, что хотите удалить этот раздел?</span>
                                 </div>
                                 <div className="flex justify-around w-full">
                                     {
-                                        statusReq === null ? <span onClick={()=> deleteCategory()} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>Да</span>
-                                                       : <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-3" style={{"backgroundColor" : "rgba(0, 147, 152, 1)"}}>
+                                        statusReq === null ? <span onClick={()=> deleteCategory()} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5 bg-blue-green">Да</span>
+                                                       : <span className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-3 bg-blue-green">
                                                             <svg className="animate-spin -ml-1 mr-3 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                             </svg>
                                                          </span>
                                     }
-                                    <span onClick={()=> setCategoryMadal(false)} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5" style={{"backgroundColor" : "rgb(152, 0, 147)"}}>Нет</span>   
+                                    <span onClick={()=> setCategoryMadal(false)} className="block cursor-pointer h-12 rounded-3xl text-3xl text-white px-16 py-1.5 bg-red-blue">Нет</span>   
                                 </div>
                             </> : 
                             <>

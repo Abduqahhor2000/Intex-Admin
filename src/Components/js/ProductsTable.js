@@ -42,7 +42,7 @@ export default function ProductsTable({category_id, oneHand}) {
 
     if(!products.length){
         return(
-            <div style={{"width": "300px"}} className="mx-auto mt-40" >
+            <div className="mx-auto w-80 mt-40" >
                 <Triangle 
                     height = "300"
                     width = "300"

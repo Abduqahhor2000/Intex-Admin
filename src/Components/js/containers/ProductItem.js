@@ -13,11 +13,11 @@ export default function ProductItem({item}) {
                 <td className="rounded-l-3xl" >
                    <img src={item.image} crossOrigin="anonymous" className="h-16 w-auto ml-10" alt="img"></img>
                 </td>
-                <td className="py-2 flex flex-col justify-center">
-                    <span className="chegirmasiz text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute after:left-1 after:w-1/3 relative inline-block">{numberConvert(item.price)} сум</span>
+                <td className="py-2 flex flex-col ">
+                    <span className="text-gray-777 after:bg-red-500 after:w-full after:block after:pt-0.5 text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute relative w-fit">{numberConvert(item.price)} сум</span>
                     <span className="text-base font-bold">{numberConvert(item.sale_price)} сум</span>
                 </td>
-                <td className="py-1.5">{numberConvert(item.quantity)}</td>
+                <td className="py-1.5 text-center">{numberConvert(item.quantity)}</td>
                 <td className="py-1.5">{item.frame_ru}</td>
                 <td className="py-1.5">{item.size}</td>
                 <td className="py-1.5">{item.depth}</td>

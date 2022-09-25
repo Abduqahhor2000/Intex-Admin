@@ -22,7 +22,7 @@ export default function Sales () {
 
     if(orders.length === 0){
         return(
-            <div style={{"width": "300px"}} className="mx-auto mt-40" >
+            <div className="mx-auto w-80 mt-40" >
                 <Triangle 
                     height = "300"
                     width = "300"
@@ -39,7 +39,7 @@ export default function Sales () {
     return(
         <>
             <table className="w-full border-spacing-y-2 border-separate">
-                <thead className="text-xl bg-white text-left ">
+                <thead className="text-xl bg-white text-left">
                     <tr>
                         <td className="py-5 rounded-l-3xl pl-11">Имя клиента</td>
                         <td className="py-5">Телефон</td>

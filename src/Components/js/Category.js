@@ -23,7 +23,7 @@ export default function Category() {
 
     // if(categories.length === 0){
     //     return(
-    //         <div style={{"width": "300px"}} className="mx-auto mt-40" >
+    //         <div className="mx-auto w-80 mt-40" >
     //             <Triangle 
     //                 height = "300"
     //                 width = "300"
@@ -41,7 +41,7 @@ export default function Category() {
         <>
             <div className="px-10 py-6">
                 <div className="flex justify-end items-center">
-                    <div onClick={()=>{setCategoryMadal(true); setId(null)}} className="h-16 rounded-3xl py-4 px-3 text-center text-xl font-middle text-white shadow-lg cursor-pointer" style={{"backgroundColor": "rgb(0, 147, 152)"}}>
+                    <div onClick={()=>{setCategoryMadal(true); setId(null)}} className="h-16 rounded-3xl py-4 px-3 text-center text-xl font-middle text-white shadow-lg cursor-pointer bg-blue-green">
                         + Добавить категории 
                     </div>
                 </div>

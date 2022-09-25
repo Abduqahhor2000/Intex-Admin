@@ -21,7 +21,7 @@ export default function Orders() {
 
     if(!siteInfo.phone_number){
         return(
-            <div style={{"width": "300px"}} className="mx-auto mt-40" >
+            <div className="mx-auto w-80 mt-40" >
                 <Triangle 
                     height = "300"
                     width = "300"
@@ -108,7 +108,6 @@ export default function Orders() {
             {
                 typeMadal !== null ? <SiteSectionMadal typeMadal={typeMadal} setTypeMadal={setTypeMadal} typeInfo={typeInfo} setTypeInfo={setTypeInfo}/> : null
             }
-            
         </>
     )
 }

@@ -124,8 +124,8 @@ export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
 
     return (
         <>
-            <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen" style={{"backgroundColor": "rgba(0, 0, 0, 0.2)", "backdropFilter": "blur(7px)"}}></div>
-            <div className="scrool absolute z-10 flex flex-col justify-between items-center top-0 bg-slate-100 p-12 pt-6 pb-9 rounded-3xl right-1/2 translate-x-1/2 top-10" style={{"width": "1130px"}}>
+            <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen backdrop-blur bg-black-02"></div>
+            <div className="scrool absolute z-10 flex flex-col justify-between items-center top-0 bg-slate-100 p-12 pt-6 pb-9 rounded-3xl right-1/2 translate-x-1/2 top-10 w-282.5">
                 <span onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
@@ -135,7 +135,7 @@ export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
                 {
                     statusReq !== "complate" ? 
                     <>
-                        <div className={`relative h-80 flex flex-col cursor-pointer bg-slate-50 justify-center rounded-3xl shadow-lg border-slate-400 border-2 border-dashed mb-6 mt-4 ${notRequer && (productImage.length < 1) ? "border-red-500" : ""}`}  style={{"width": "690px"}}>
+                        <div className={`relative h-80 flex flex-col cursor-pointer bg-slate-50 justify-center rounded-3xl shadow-lg border-slate-400 border-2 border-dashed mb-6 mt-4 w-172.5 ${notRequer && (productImage.length < 1) ? "border-red-500" : ""}`}>
                             <input onChange={(e) => {uploadImage(e);}} type="file" className="uploadfile absolute w-full h-full cursor-pointer"/>
                             {
                                 productImage ? <img className="w-full h-full object-contain rounded-3xl" src={productImage} alt="" crossOrigin="anonymous"/> : 
@@ -237,13 +237,13 @@ export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
                             </div>
                         </div>
                         {
-                            statusReq === "active" ?  <div className="block flex justify-center w-60 rounded-3xl text-white text-2xl text-center py-3 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>
+                            statusReq === "active" ?  <div className="block flex justify-center w-60 rounded-3xl text-white text-2xl text-center py-3 cursor-pointer mt-6 bg-blue-green">
                                                         <svg className="animate-spin -ml-1 mr-3 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                         </svg>
                                                       </div>
-                                                   :  <div onClick={()=>{addProduct()}} className="w-60 rounded-3xl text-white text-2xl text-center pt-1.5 pb-1.5 cursor-pointer mt-6" style={{"backgroundColor": "rgb(0, 147, 152)"}}>Добавить</div>
+                                                   :  <div onClick={()=>{addProduct()}} className="w-60 rounded-3xl text-white text-2xl text-center pt-1.5 pb-1.5 cursor-pointer mt-6 bg-blue-green">Добавить</div>
                         }
                     </> : 
                     <>
