@@ -26,7 +26,7 @@ export default function Products() {
 
     if(!categories.length){
         return(
-            <div className="mx-auto w-80 mt-40" >
+            <div className="mx-auto w-80 mt-40">
                 <Triangle 
                     height = "300"
                     width = "300"
