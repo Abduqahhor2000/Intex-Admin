@@ -3,6 +3,7 @@ import SiteSectionMadal from "./madals/SiteSectionMadal"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Triangle  } from  'react-loader-spinner'
+import { scrollOf } from "./function/scrollOf"
 import { getSiteInfo } from "./fetching/getSiteInfo"
 import { addAllSiteInfo } from "../../redux/siteInfoReducer"
 import { useNavigate } from "react-router-dom"
@@ -17,6 +18,7 @@ export default function Orders() {
 
     useEffect(()=>{
         getSiteInfo(token, dispatch, addAllSiteInfo, navigate)
+        scrollOf(typeMadal)
     }, [typeMadal])
 
     if(!siteInfo.phone_number){

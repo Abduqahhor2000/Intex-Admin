@@ -11,7 +11,7 @@ export async function getConsultations (token, dispatch, addAllConsultations, na
                 Authorization: `Bearer ${token}`,
             },
         })
-        dispatch(addAllConsultations(data?.data))
+        dispatch(addAllConsultations(data?.data.reverse()))
     }catch(err){
         console.log(err)
         if(err.response.status === 401){

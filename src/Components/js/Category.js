@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CategorySectionMadal from "./madals/CategorySectionMadal";
 import { useDispatch, useSelector } from "react-redux";
 // import { Triangle  } from  'react-loader-spinner'
+import { scrollOf } from "./function/scrollOf"
 import { getCategories } from "./fetching/getCategories"
 import { addAllCategories } from "../../redux/categoryReducer"
 import { useNavigate } from  "react-router-dom"
@@ -18,7 +19,7 @@ export default function Category() {
 
     useEffect(()=>{
         if(!categoryMadal){ getCategories(token, dispatch, addAllCategories, navigate) }
-       
+        scrollOf(categoryMadal)
     }, [categoryMadal])
 
     // if(categories.length === 0){

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ConsultationMadal from "./madals/ConsultationMadal";
 import { Triangle  } from  'react-loader-spinner'
+import { scrollOf } from "./function/scrollOf"
 import { getConsultations } from "./fetching/getConsultations"
 import { addAllConsultations } from "../../redux/consultationReducer"
 import ConsultationItem from "./containers/ConsultationItem";
@@ -14,10 +15,10 @@ export default function Consultation () {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     
-
-    useEffect(()=>{
+    useEffect(() => {
         getConsultations(token, dispatch, addAllConsultations, navigate)
-    }, [])
+        scrollOf(consulID)
+      }, [consulID])
 
     if(consultations.length === 0){
         return(

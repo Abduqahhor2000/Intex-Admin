@@ -4,6 +4,7 @@ import { Triangle  } from  'react-loader-spinner'
 import "../scss/productMadal.scss"
 import { getOrders } from "./fetching/getOrders"
 import { addAllOrders } from "../../redux/orderReducer"
+import { scrollOf } from "./function/scrollOf"
 import SaleItem from "./containers/SaleItem"
 import SalesMadal from "./madals/SalesMadal"
 import { useNavigate } from "react-router-dom"
@@ -15,10 +16,10 @@ export default function Sales () {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    useEffect(()=>{
+    useEffect(() => {
         getOrders(token, dispatch, addAllOrders, navigate)
-    }, [])
-
+        scrollOf(saleID)
+      }, [saleID])
 
     if(orders.length === 0){
         return(

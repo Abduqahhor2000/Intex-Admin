@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AddProductMadal from "./madals/AddProductMadal";
 import { addAllCategories } from "../../redux/categoryReducer";
 import { getCategories } from "./fetching/getCategories";
+import { scrollOf } from "./function/scrollOf"
 
 export default function Products() {
     const token = useSelector(state => state.user.user.token)
@@ -15,7 +16,7 @@ export default function Products() {
     const [category_id, setCategory_id] = useState("");
     const [madal, setMadal] = useState(false)
     const [oneHand, setOneHand] = useState(false)
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
     
     useEffect(()=>{
         if((category_id === "") && trueCategory){
@@ -23,6 +24,10 @@ export default function Products() {
         }
         getCategories(token, dispatch, addAllCategories, navigate)
     }, [madal, token, dispatch, navigate, category_id, trueCategory])
+
+    useEffect(()=>{
+        scrollOf(madal)
+    }, [madal])
 
     if(!categories.length){
         return(
@@ -57,7 +62,7 @@ export default function Products() {
                     </div>
                 </div>
 
-                <div className="table w-full pt-3">
+                <div className="table w-full overflow-auto pt-3">
                     <div className="flex justify-center items-center mb-10">
                         {
                             categories.map((item) => {

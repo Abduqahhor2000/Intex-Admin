@@ -11,7 +11,7 @@ export async function getOrders (token, dispatch, addAllOrders, navigate) {
                 Authorization: `Bearer ${token}`,
             },
         })
-        dispatch(addAllOrders(data?.data))
+        dispatch(addAllOrders(data?.data.reverse()))
     }catch(err){
         console.log(err)
         if(err.response.status === 401){

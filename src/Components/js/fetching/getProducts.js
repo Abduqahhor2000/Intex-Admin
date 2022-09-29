@@ -12,7 +12,7 @@ export async function getProducts (token, dispatch, addAllProducts, navigate) {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         })
-        dispatch(addAllProducts(data?.data))
+        dispatch(addAllProducts(data?.data.reverse()))
     }catch(err){
         console.log(err)
         if(err.response.status === 401){
