@@ -31,7 +31,7 @@ export default function AddProductMadal({setMadal, oneHand, setOneHand}) {
     const [statusReq, setStatusReq] = useState(null)
     const [notRequer, setNotRequer] = useState(false)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
 
     const convertBase64 = (file) => {
         return new Promise((resolve, reject) => {

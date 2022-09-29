@@ -41,10 +41,10 @@ export default function Consultation () {
             <table className="w-full border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left ">
                     <tr>
-                        <th className="py-5 rounded-l-3xl pl-11">Имя клиента</th>
-                        <th className="py-5">Телефон клиента</th>
-                        <th className="py-5">Время</th>
-                        <th className="py-5 rounded-r-3xl">Действия</th>
+                        <td className="py-5 rounded-l-3xl pl-11">Имя клиента</td>
+                        <td className="py-5">Телефон клиента</td>
+                        <td className="py-5">Время</td>
+                        <td className="py-5 rounded-r-3xl">Действия</td>
                     </tr>  
                 </thead>
                 <tbody>

@@ -28,7 +28,11 @@ module.exports = {
       },
       boxShadow:{
         "login" : "0 0 7px 0 rgba(0, 0, 0, 0.25)",
-      }
+        "category-btn": "0 1px 8px 0 rgba(0, 0, 0, 0.25)",
+      },
+      minWidth:{
+        '50': '200px',
+      },
     },
   },
   plugins: [],

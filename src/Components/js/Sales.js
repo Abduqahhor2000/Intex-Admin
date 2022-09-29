@@ -38,18 +38,18 @@ export default function Sales () {
     }
 
     return(
-        <>
-            <table className="w-full border-spacing-y-2 border-separate">
+        <div className="w-full overflow-x-scroll">
+            <table className="border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left">
                     <tr>
-                        <td className="py-5 rounded-l-3xl pl-11">Имя клиента</td>
-                        <td className="py-5">Телефон</td>
-                        <td className="py-5">Изображение</td>
-                        <td className="py-5 px-3">Размер(м)/ <br/>Глубина(см)</td>
-                        <td className="py-5">Цена(сум)</td>
-                        <td className="py-5">Адрес</td>
-                        <td className="py-5">Время</td>
-                        <td className="py-5 rounded-r-3xl pr-5">Действия</td>
+                        <td className="py-5 min-w-50 rounded-l-3xl pl-11">Имя клиента</td>
+                        <td className="py-5 min-w-50">Телефон</td>
+                        <td className="py-5 min-w-50">Изображение</td>
+                        <td className="py-5 min-w-50 px-3">Размер(м)/ <br/>Глубина(см)</td>
+                        <td className="py-5 min-w-50">Цена(сум)</td>
+                        <td className="py-5 min-w-50">Адрес</td>
+                        <td className="py-5 min-w-50">Время</td>
+                        <td className="py-5 min-w-50 rounded-r-3xl pr-5">Действия</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +66,6 @@ export default function Sales () {
             {   
                 saleID ? <SalesMadal saleID={saleID} setSaleID={setSaleID}/> : null
             }
-        </>
+        </div>
     )
 }

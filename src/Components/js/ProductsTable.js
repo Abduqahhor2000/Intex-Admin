@@ -57,8 +57,8 @@ export default function ProductsTable({category_id, oneHand}) {
     }
 
     return (
-        <div className="overflow-x-auto w-full">
-            <table className="w-[900px] xl:w-full border-spacing-y-2 border-separate">
+        <div className="w-full">
+            <table className="border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left">
                     <tr>
                         <td className="py-5 rounded-l-3xl pl-11">Изображение</td>

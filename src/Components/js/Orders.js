@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Sales from "./Sales";
-import Consultation from "./Consultation";
+import Consultation from "./Consultation"; 
 
 export default function Orders() {
     const [orderName, setOrderName] = useState("sales");
     return(
         <>
-            <div className="bg-lighter min-h-screen px-10 py-6">
+            <div className="bg-lighter w-full px-10 py-6">
                 <div className="flex justify-between">
                     <div className="w-96 h-16 rounded-3xl bg-white flex shadow-lg items-center justify-between">
                         <input className="w-64 h-16 text-xl text-black ml-9 placeholder:text-gray-777 border-none outline-none pb-0.5 leading-6" placeholder="Найти"/>
@@ -18,12 +18,12 @@ export default function Orders() {
                     </div>
                 </div>
 
-                <div className="table w-full pt-3">
+                <div className="pt-3">
                     <div className="flex justify-center items-center mb-10"> 
-                        <span className={`min-w-40 duration-300 after:content-[''] after:block after:w-0 after:height-px after:border-b-4 after:border-solid after:border-transparent after:relative after:top-2 after:duration-500 after:left-24  cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${orderName === "sales" ? "text-blue-green cursor-pointer after:w-full after:border-blue-green after:left-0" : "text-gray-777"}`} onClick={() => setOrderName("sales")}>
+                        <span className={`min-w-40 duration-300 after:content-[''] after:block after:w-0 after:height-px after:border-b-4 after:border-solid after:border-transparent after:relative after:top-2 after:duration-500 after:left-24  cursor-pointer text-3xl ml-5 py-4 font-bold text-center ${orderName === "sales" ? "text-blue-green cursor-pointer after:w-full after:border-blue-green after:left-0" : "text-gray-777"}`} onClick={() => setOrderName("sales")}>
                             Заказы
                         </span>
-                        <span className={`min-w-40 duration-300 after:content-[''] after:block after:w-0 after:height-px after:border-b-4 after:border-solid after:border-transparent after:relative after:top-2 after:duration-500 after:left-24  cursor-pointer text-4xl ml-5 py-4 font-bold text-center ${orderName === "consultation" ? "text-blue-green cursor-pointer after:w-full after:border-blue-green after:left-0" : "text-gray-777"}`} onClick={() => setOrderName("consultation")}>
+                        <span className={`min-w-40 duration-300 after:content-[''] after:block after:w-0 after:height-px after:border-b-4 after:border-solid after:border-transparent after:relative after:top-2 after:duration-500 after:left-24  cursor-pointer text-3xl ml-5 py-4 font-bold text-center ${orderName === "consultation" ? "text-blue-green cursor-pointer after:w-full after:border-blue-green after:left-0" : "text-gray-777"}`} onClick={() => setOrderName("consultation")}>
                             Консультации
                         </span>   
                     </div> 

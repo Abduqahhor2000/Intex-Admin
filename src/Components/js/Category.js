@@ -42,16 +42,16 @@ export default function Category() {
         <>
             <div className="px-10 py-6">
                 <div className="flex justify-end items-center">
-                    <div onClick={()=>{setCategoryMadal(true); setId(null)}} className="h-16 rounded-3xl py-4 px-3 text-center text-xl font-middle text-white shadow-lg cursor-pointer bg-blue-green">
+                    <div onClick={()=>{setCategoryMadal(true); setId(null)}} className="h-16 rounded-3xl py-4 px-3 text-center text-xl font-base text-white shadow-category-btn shadow-gray-400 cursor-pointer bg-blue-green">
                         + Добавить категории 
                     </div>
                 </div>
                 <table className="w-full mt-10 border-spacing-y-2 border-separate">
                     <thead className="text-xl bg-white text-left ">
                         <tr>
-                            <th className="py-5 rounded-l-3xl pl-11">Название</th>
-                            <th className="py-5 text-center">На узбекском</th>
-                            <th className="py-5 rounded-r-3xl text-right pr-11">Действия</th>
+                            <td className="py-5 rounded-l-3xl pl-11">Название</td>
+                            <td className="py-5 text-center">На узбекском</td>
+                            <td className="py-5 rounded-r-3xl text-right pr-11">Действия</td>
                         </tr>
                     </thead>
                     <tbody>
