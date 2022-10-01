@@ -37,14 +37,14 @@ export default function Consultation () {
     }
 
     return(
-        <>
+        <div className="px-10 overflow-x-auto">
             <table className="w-full border-spacing-y-2 border-separate">
                 <thead className="text-xl bg-white text-left ">
                     <tr>
-                        <td className="py-5 rounded-l-3xl pl-11">Имя клиента</td>
-                        <td className="py-5">Телефон клиента</td>
-                        <td className="py-5">Время</td>
-                        <td className="py-5 rounded-r-3xl">Действия</td>
+                        <td className="py-5 min-w-pradaja rounded-l-3xl pl-11">Имя клиента</td>
+                        <td className="py-5 min-w-pradaja">Телефон клиента</td>
+                        <td className="py-5 min-w-pradaja">Время</td>
+                        <td className="py-5 w-36 rounded-r-3xl">Действия</td>
                     </tr>  
                 </thead>
                 <tbody>
@@ -59,6 +59,6 @@ export default function Consultation () {
                 </tbody>
             </table>
             { consulID ?  <ConsultationMadal consulID={consulID} setConsulID={setConsulID}/> : null}
-        </>
+        </div>
     )
 }

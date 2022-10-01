@@ -1,27 +1,36 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import DelProductMadal from "../madals/DelProductMadal"
 import ProductMadal from "../madals/ProductMadal"
 import { numberConvert } from "../function/nuberConvert"
+import { scrollOf } from "../function/scrollOf"
 
 export default function ProductItem({item}) {
     const [madal, setMadal] = useState(false)
     const [productID, setProductID] = useState("")
 
+    useEffect(() => {
+        scrollOf(madal)
+       
+    }, [madal])
+    useEffect(() => {
+        scrollOf(productID)
+    }, [productID])
+
      return (
         <>
             <tr className="bg-white">
-                <td className="rounded-l-3xl" >
+                <td className="rounded-l-3xl min-w-pradaja" >
                    <img src={item.image} crossOrigin="anonymous" className="h-16 w-auto ml-10" alt="img"></img>
                 </td>
-                <td className="py-2 flex flex-col ">
+                <td className="py-2 flex flex-col min-w-razmer">
                     <span className="text-gray-777 after:bg-red-500 after:w-full after:block after:pt-0.5 text-xs after:content-[''] after:rotate-6 after:top-2 after:absolute relative w-fit">{numberConvert(item.price)} сум</span>
                     <span className="text-base font-bold">{numberConvert(item.sale_price)} сум</span>
                 </td>
-                <td className="py-1.5 text-center">{numberConvert(item.quantity)}</td>
-                <td className="py-1.5">{item.frame_ru}</td>
-                <td className="py-1.5">{item.size}</td>
-                <td className="py-1.5">{item.depth}</td>
-                <td className="py-1.5 rounded-r-3xl">
+                <td className="py-1.5 min-w-razmer">{numberConvert(item.quantity)}</td>
+                <td className="py-1.5 min-w-pradaja">{item.frame_ru}</td>
+                <td className="py-1.5 min-w-sena">{item.size}</td>
+                <td className="py-1.5 min-w-sena">{item.depth}</td>
+                <td className="py-1.5 w-36 min-w-sena rounded-r-3xl">
                     <div className="flex">
                         <span onClick={()=>{setMadal(true); }} className="p-2 cursor-pointer">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

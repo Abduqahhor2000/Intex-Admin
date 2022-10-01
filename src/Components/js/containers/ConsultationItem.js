@@ -37,10 +37,10 @@ export default function ConsultationItem({item, setConsulID}) {
     return(
         <>
             <tr className="bg-white text-xl">
-                <td className="rounded-l-3xl py-5 pl-10">{item.name}</td>
-                <td className="py-1.5">{item.phone_number}</td>
-                <td className="py-1.5">{timeConvert(item.time_consultation)}</td>
-                <td className="py-1.5 rounded-r-3xl">
+                <td className="rounded-l-3xl min-w-pradaja py-5 pl-10">{item.name}</td>
+                <td className="py-1.5 min-w-pradaja">{item.phone_number}</td>
+                <td className="py-1.5 min-w-pradaja">{timeConvert(item.time_consultation)}</td>
+                <td className="py-1.5 w-36 rounded-r-3xl">
                     <div className="flex">
                         {
                               reqStatus === item.consultation_id ?

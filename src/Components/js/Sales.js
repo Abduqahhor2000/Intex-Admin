@@ -38,18 +38,18 @@ export default function Sales () {
     }
 
     return(
-        <div className="w-full overflow-x-scroll">
-            <table className="border-spacing-y-2 border-separate">
-                <thead className="text-xl bg-white text-left">
+        <div className="w-full overflow-x-auto px-10">
+            <table className="border-spacing-y-2 border-separate w-full">
+                <thead className="text-xl bg-white text-left w-full">
                     <tr>
-                        <td className="py-5 min-w-50 rounded-l-3xl pl-11">Имя клиента</td>
-                        <td className="py-5 min-w-50">Телефон</td>
-                        <td className="py-5 min-w-50">Изображение</td>
-                        <td className="py-5 min-w-50 px-3">Размер(м)/ <br/>Глубина(см)</td>
-                        <td className="py-5 min-w-50">Цена(сум)</td>
-                        <td className="py-5 min-w-50">Адрес</td>
-                        <td className="py-5 min-w-50">Время</td>
-                        <td className="py-5 min-w-50 rounded-r-3xl pr-5">Действия</td>
+                        <td className="py-5 min-w-pradaja rounded-l-3xl pl-11">Имя клиента</td>
+                        <td className="py-5 min-w-pradaja">Телефон</td>
+                        <td className="py-5 min-w-razmer">Изображение</td>
+                        <td className="py-5 min-w-razmer px-3">Размер(м)/ <br/>Глубина(см)</td>
+                        <td className="py-5 min-w-sena">Цена(сум)</td>
+                        <td className="py-5 min-w-pradaja">Адрес</td>
+                        <td className="py-5 min-w-pradaja">Время</td>
+                        <td className="py-5 w-36 rounded-r-3xl pr-5">Действия</td>
                     </tr>
                 </thead>
                 <tbody>

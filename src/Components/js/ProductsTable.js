@@ -57,17 +57,17 @@ export default function ProductsTable({category_id, oneHand}) {
     }
 
     return (
-        <div className="w-full">
-            <table className="border-spacing-y-2 border-separate">
+        <div className="w-full overflow-x-auto px-10">
+            <table className="border-spacing-y-2 w-full border-separate">
                 <thead className="text-xl bg-white text-left">
                     <tr>
-                        <td className="py-5 rounded-l-3xl pl-11">Изображение</td>
-                        <td className="py-5">Цена(сум)</td>
-                        <td className="py-5">Количество</td>
-                        <td className="py-5">Рамка</td>
+                        <td className="py-5 min-w-pradaja rounded-l-3xl pl-11">Изображение</td>
+                        <td className="py-5 min-w-razmer">Цена(сум)</td>
+                        <td className="py-5 min-w-razmer">Количество</td>
+                        <td className="py-5 min-w-pradaja">Рамка</td>
                         <td className="py-5">Размер(м)</td>
                         <td className="py-5">Глубина(см)</td>
-                        <td className="py-5 rounded-r-3xl">Действия</td>
+                        <td className="py-5 w-36 min-w-sena rounded-r-3xl">Действия</td>
                     </tr>
                 </thead>
                 <tbody>

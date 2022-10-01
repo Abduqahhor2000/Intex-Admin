@@ -38,18 +38,18 @@ export default function SaleItem({item, setSaleID}) {
     return(
         <>
             <tr className="bg-white text-xl">
-                <td className="min-w-50 rounded-l-3xl py-1.5 pl-10">{item.name}</td>
-                <td className="min-w-50 py-1.5">{item.phone_number}</td>
-                <td className="min-w-50 ">
+                <td className="min-w-pradaja rounded-l-3xl py-1.5 pl-10">{item.name}</td>
+                <td className="min-w-pradaja py-1.5">{item.phone_number}</td>
+                <td className="min-w-razmer ">
                     <img src={item.image} crossOrigin="anonymous" alt="" className="h-16"></img>
                 </td>
-                <td className="min-w-50 py-1.5 px-3">{item.size}</td>
-                <td className="min-w-50 py-1.5">{numberConvert(item.price)}</td>
-                <td className="min-w-50 py-1.5 text-base">
+                <td className="min-w-razmer py-1.5 px-3">{item.size}</td>
+                <td className="min-w-sena py-1.5">{numberConvert(item.price)}</td>
+                <td className="min-w-pradaja py-1.5 text-base">
                     <span className="w-48 block">{item.address}</span>
                 </td>
-                <td className="min-w-50 py-1.5">{timeConvert(item.time_order)}</td>
-                <td className="min-w-50 py-1.5 rounded-r-3xl">
+                <td className="min-w-pradaja py-1.5">{timeConvert(item.time_order)}</td>
+                <td className="w-36 py-1.5 rounded-r-3xl">
                     <div className="flex">
                         {
                             reqStatus === item.order_id ?

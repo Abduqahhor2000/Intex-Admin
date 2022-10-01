@@ -6,8 +6,8 @@ export default function Orders() {
     const [orderName, setOrderName] = useState("sales");
     return(
         <>
-            <div className="bg-lighter w-full px-10 py-6">
-                <div className="flex justify-between">
+            <div className="bg-lighter w-full py-6">
+                {/* <div className="flex justify-between px-10">
                     <div className="w-96 h-16 rounded-3xl bg-white flex shadow-lg items-center justify-between">
                         <input className="w-64 h-16 text-xl text-black ml-9 placeholder:text-gray-777 border-none outline-none pb-0.5 leading-6" placeholder="Найти"/>
                         <span className="w-20 h-10 border-[#E6E6E6] px-6 py-2 block border-solid border-l-2">
@@ -16,7 +16,7 @@ export default function Orders() {
                             </svg>
                         </span>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="pt-3">
                     <div className="flex justify-center items-center mb-10"> 

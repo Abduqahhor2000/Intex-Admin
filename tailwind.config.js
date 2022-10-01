@@ -31,7 +31,11 @@ module.exports = {
         "category-btn": "0 1px 8px 0 rgba(0, 0, 0, 0.25)",
       },
       minWidth:{
-        '50': '200px',
+        'pradaja': '200px',
+        'destviya': '100px',
+        'sena': "130px",
+        'razmer': "150px",
+        
       },
     },
   },
