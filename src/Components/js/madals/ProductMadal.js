@@ -140,7 +140,7 @@ export default function ProductMadal({setMadal, item}) {
     return (
         <>
             <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen bg-black-02 backdrop-blur"></div>
-            <div className="scrool absolute z-10 flex flex-col justify-between items-center max-h-[90vh] overflow-auto bg-slate-100 p-12 pt-6 pb-9 rounded-3xl right-1/2 translate-x-1/2 top-10 w-282.5">
+            <div className="scrool fixed z-10 flex flex-col justify-between items-center max-h-[90vh] min-h-fit overflow-auto bg-slate-100 p-12 pt-6 pb-9 rounded-3xl m-auto inset-0 w-282.5">
                 <span onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
@@ -298,8 +298,8 @@ export default function ProductMadal({setMadal, item}) {
                             </div>
                         </div>
                         {
-                            statusReq === "active" ? <div className="block flex justify-center w-60 rounded-3xl text-white text-2xl text-center py-3 cursor-pointer mt-6 bg-blue-green">
-                                                        <svg className="animate-spin -ml-1 mr-3 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            statusReq === "active" ? <div className="flex justify-center w-60 rounded-3xl text-white text-2xl text-center py-3.5 cursor-pointer mt-6 bg-blue-green">
+                                                        <svg className="animate-spin mr-3 ml-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                                         </svg>

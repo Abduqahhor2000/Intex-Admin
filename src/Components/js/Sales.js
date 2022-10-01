@@ -42,13 +42,13 @@ export default function Sales () {
             <table className="border-spacing-y-2 border-separate w-full">
                 <thead className="text-xl bg-white text-left w-full">
                     <tr>
-                        <td className="py-5 min-w-pradaja rounded-l-3xl pl-11">Имя клиента</td>
-                        <td className="py-5 min-w-pradaja">Телефон</td>
+                        <td className="py-5 pr-3 min-w-pradaja rounded-l-3xl pl-11">Имя клиента</td>
+                        <td className="py-5 px-3 min-w-pradaja">Телефон</td>
                         <td className="py-5 min-w-razmer">Изображение</td>
                         <td className="py-5 min-w-razmer px-3">Размер(м)/ <br/>Глубина(см)</td>
-                        <td className="py-5 min-w-sena">Цена(сум)</td>
+                        <td className="py-5 px-3 min-w-sena">Цена(сум)</td>
                         <td className="py-5 min-w-pradaja">Адрес</td>
-                        <td className="py-5 min-w-pradaja">Время</td>
+                        <td className="py-5 min-w-[11rem] px-3">Время</td>
                         <td className="py-5 w-36 rounded-r-3xl pr-5">Действия</td>
                     </tr>
                 </thead>
