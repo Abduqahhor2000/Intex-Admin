@@ -64,6 +64,7 @@ export default function MeanSection() {
           </div>
           <ul className="flex flex-col text-gray-640">
             <Link
+              data-testid="products"
               to="/products"
               className={`mb-4 text-2xl cursor-pointer hover:text-blue-green-300 ${
                 pathname === "/products"
@@ -74,6 +75,7 @@ export default function MeanSection() {
               Продукты
             </Link>
             <Link
+              data-testid="orders"
               to="/orders"
               className={`mb-4 text-2xl cursor-pointer hover:text-blue-green-300 ${
                 pathname === "/orders"
@@ -84,6 +86,7 @@ export default function MeanSection() {
               Заказы
             </Link>
             <Link
+              data-testid="types"
               to="/types"
               className={`mb-4 text-2xl cursor-pointer hover:text-blue-green-300 ${
                 pathname === "/types"
@@ -94,6 +97,7 @@ export default function MeanSection() {
               Категории
             </Link>
             <Link
+              data-testid="site"
               to="/site"
               className={`mb-4 text-2xl cursor-pointer hover:text-blue-green-300 ${
                 pathname === "/site"
@@ -136,7 +140,7 @@ export default function MeanSection() {
                   stroke="#A6A6A6"
                 />
               </svg>
-              {user.user.user_firstname} {user.user.user_lastname}
+              {user?.user?.user_firstname} {user?.user?.user_lastname}
               <span
                 onClick={() => {
                   dispatch(removeUser());

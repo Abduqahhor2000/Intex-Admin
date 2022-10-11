@@ -12,6 +12,7 @@ export async function getConsultations (token, dispatch, addAllConsultations, na
             },
         })
         dispatch(addAllConsultations(data?.data.reverse()))
+        return(data?.data)
     }catch(err){
         console.log(err)
         if(err.response.status === 401){
@@ -21,5 +22,7 @@ export async function getConsultations (token, dispatch, addAllConsultations, na
         if(err.response.status === 0){
             navigate("/noconnect")
         }
+        return(err)
+
     }
 }

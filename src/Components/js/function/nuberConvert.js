@@ -1,6 +1,6 @@
 export const numberConvert = (number) => {
   let newNumber = "";
-  let numArr = Array.from(number.toString());
+  let numArr = Array.from(number?.toString() || "");
 
   let numHead = numArr.length % 3;
   if (numHead !== 0) {

@@ -12,6 +12,7 @@ export async function getSiteInfo (token, dispatch, addAllSiteInfo, navigate) {
             },
         })
         dispatch(addAllSiteInfo(data?.data[0]))
+        return(data?.data)
     }catch(err){
         console.log(err)
         if(err.response.status === 401){
@@ -21,5 +22,6 @@ export async function getSiteInfo (token, dispatch, addAllSiteInfo, navigate) {
         if(err.response.status === 0){
             navigate("/noconnect")
         }
+        return(err)
     }
 }

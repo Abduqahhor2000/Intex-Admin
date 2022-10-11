@@ -18,7 +18,7 @@ export default function Consultation () {
     useEffect(() => {
         getConsultations(token, dispatch, addAllConsultations, navigate)
         scrollOf(consulID)
-      }, [consulID])
+      }, [consulID, dispatch, navigate, token])
 
     if(consultations.length === 0){
         return(

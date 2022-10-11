@@ -1,6 +1,6 @@
 import "./App.css";
 import MeanSection from "./Components/js/MeanSection";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Products from "./Components/js/Products";
 import Orders from "./Components/js/Orders";
 import Category from "./Components/js/Category";
@@ -8,11 +8,11 @@ import Site from "./Components/js/Site";
 import Login from "./Components/js/Login";
 import NoConnectPage from "./Components/js/NoConnectPage";
 import NotFoundPage from "./Components/js/NotFoundPage";
+import {LocationDisplay} from "./Components/js/LocationDisplay"
 
-function App() {
+function DefaultApp() {
   return (
     <div className="App">
-      <HashRouter>
         <Routes>
           <Route path="/" element={<MeanSection />}>
             <Route path="/orders" element={<Orders />}></Route>
@@ -24,8 +24,9 @@ function App() {
           <Route path="/noconnect" element={<NoConnectPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </HashRouter>
+        
+        <LocationDisplay/>
     </div>
   );
 }
-export default App;
+export default DefaultApp;

@@ -1,6 +1,6 @@
 export const scrollOf = (control) => {
-
     let bodyTag = document.querySelector("body")
+    
     if(control){
         bodyTag.classList.add("overflow-y-hidden")
         bodyTag.classList.add("h-screen")

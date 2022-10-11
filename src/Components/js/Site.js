@@ -21,21 +21,21 @@ export default function Orders() {
         scrollOf(typeMadal)
     }, [typeMadal])
 
-    if(!siteInfo.phone_number){
-        return(
-            <div className="mx-auto w-80 mt-40" >
-                <Triangle 
-                    height = "300"
-                    width = "300"
-                    radius = "9"
-                    color = '#009398'
-                    ariaLabel = 'three-dots-loading'     
-                    wrapperStyle
-                    wrapperClass
-                />
-            </div>
-        )
-    }
+    // if(!siteInfo.phone_number){
+    //     return(
+    //         <div className="mx-auto w-80 mt-40" >
+    //             <Triangle 
+    //                 height = "300"
+    //                 width = "300"
+    //                 radius = "9"
+    //                 color = '#009398'
+    //                 ariaLabel = 'three-dots-loading'     
+    //                 wrapperStyle
+    //                 wrapperClass
+    //             />
+    //         </div>
+    //     )
+    // }
 
     return(
         <>

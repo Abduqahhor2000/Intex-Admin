@@ -10,6 +10,8 @@ export async function getCategories (token, dispatch, addAllCategories, navigate
             },
         })
         dispatch(addAllCategories(data?.data))
+        navigate("/login")
+        return(data?.data)
     }catch(err){
         console.log(err)
         if(err.response.status === 401){
@@ -19,5 +21,6 @@ export async function getCategories (token, dispatch, addAllCategories, navigate
         if(err.response.status === 0){
             navigate("/noconnect")
         }
+        return(err)
     }
 }

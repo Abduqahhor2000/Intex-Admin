@@ -12,6 +12,7 @@ export async function getOrders (token, dispatch, addAllOrders, navigate) {
             },
         })
         dispatch(addAllOrders(data?.data.reverse()))
+        return(data?.data)
     }catch(err){
         console.log(err)
         if(err.response.status === 401){
@@ -21,5 +22,6 @@ export async function getOrders (token, dispatch, addAllOrders, navigate) {
         if(err.response.status === 0){
             navigate("/noconnect")
         }
+        return(err)
     }
 }

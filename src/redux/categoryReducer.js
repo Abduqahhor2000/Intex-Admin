@@ -13,7 +13,7 @@ export const categorySlice = createSlice({
       state.categories = [action.payload, ...state.categories]
     },
     updateCategory : (state, action) => {
-      state.categories = state.categories.map((item) => item.category_id === action.payload.category_id ? action.payload: item)
+      state.categories = state.categories.map((item) => item.category_id === action.payload.category_id ? action.payload : item)
     },
     delOneCategory: (state, action) => {
       state.categories = state.categories.filter((item) => item.category_id === action.payload.category_id ? false : true)

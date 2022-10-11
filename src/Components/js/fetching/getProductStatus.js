@@ -14,6 +14,7 @@ export async function getProductStatus (token, dispatch, addProductStatus, navig
         })
 
         dispatch(addProductStatus(data?.data))
+        return(data?.data)
     }catch(err){
         console.log(err)
         if(err.response.status === 401){
@@ -23,5 +24,6 @@ export async function getProductStatus (token, dispatch, addProductStatus, navig
         if(err.response.status === 0){
             navigate("/noconnect")
         }
+        return(err)
     }
 }
