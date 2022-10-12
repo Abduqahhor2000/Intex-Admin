@@ -19,8 +19,7 @@ jest.mock("react-router-dom")
 const useDispatchSpy = jest.spyOn(redux, 'useDispatch');
 const useNavigateSpy = jest.spyOn(reactRouterDom, 'useNavigate');
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyX2ZpcnN0bmFtZSI6IkFsaSIsInVzZXJfbGFzdG5hbWUiOiJTdXInYXRvdiIsInVzZXJuYW1lIjoidGhlYmVrb2ZmIiwicm9sZV9uYW1lIjoic3VwZXItYWRtaW4ifSwiaWF0IjoxNjY1NDYxOTE4LCJleHAiOjE2NjU1NDgzMTh9.0MSEoodZUmWbg-TgRcEpGRHwHeJSDsl5qNtlWnnFjp8"
-
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyX2ZpcnN0bmFtZSI6IkFsaSIsInVzZXJfbGFzdG5hbWUiOiJTdXInYXRvdiIsInVzZXJuYW1lIjoidGhlYmVrb2ZmIiwicm9sZV9uYW1lIjoic3VwZXItYWRtaW4ifSwiaWF0IjoxNjY1NTYxNzI1LCJleHAiOjE2NjU2NDgxMjV9.Cscy3PZXKpEYeOmG48aum595ubL_nR9rxn-LbXz-2zg"
 test("getCategories was tested...", async ()=>{
     // useDispatchSpy.mockReturnValue(mockDispatchFn)
     // const dispatch = mockDispatchFn(useDispatchSpy)

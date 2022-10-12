@@ -23,6 +23,5 @@ export async function getConsultations (token, dispatch, addAllConsultations, na
             navigate("/noconnect")
         }
         return(err)
-
     }
 }

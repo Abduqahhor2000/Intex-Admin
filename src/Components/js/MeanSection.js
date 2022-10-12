@@ -33,6 +33,8 @@ export default function MeanSection() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // console.log(user, token)
+
   function start() {
     getConsultations(token, dispatch, addAllConsultations, navigate);
     getProducts(token, dispatch, addAllProducts, navigate);
@@ -48,8 +50,8 @@ export default function MeanSection() {
       navigate("/login");
     }
     if (token && (new Date().getTime() - timer > 60000 || timer === "")) {
-      start();
-    }
+      start();   
+    } 
     if (pathname === "/") {
       navigate("/products");
     }

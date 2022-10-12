@@ -100,7 +100,7 @@ test('full app rendering/navigating', async () => {
   
   await user.click(screen.getByTestId("types"))
   expect(screen.getByText(/Добавить категории/i)).toBeInTheDocument()
-
+ 
   await user.click(screen.getByTestId("site"))
   expect(screen.getByText(/Рабочее время/i)).toBeInTheDocument()
 

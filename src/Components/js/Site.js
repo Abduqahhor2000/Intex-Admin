@@ -2,7 +2,7 @@ import { useState } from "react";
 import SiteSectionMadal from "./madals/SiteSectionMadal"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Triangle  } from  'react-loader-spinner'
+// import { Triangle  } from  'react-loader-spinner'
 import { scrollOf } from "./function/scrollOf"
 import { getSiteInfo } from "./fetching/getSiteInfo"
 import { addAllSiteInfo } from "../../redux/siteInfoReducer"
