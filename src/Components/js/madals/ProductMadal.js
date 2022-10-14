@@ -140,8 +140,8 @@ export default function ProductMadal({setMadal, item}) {
     return (
         <>
             <div onClick={()=> {setMadal(false);}} className="fixed z-10 top-0 left-0 w-screen h-screen bg-black-02 backdrop-blur"></div>
-            <div className="scrool fixed z-10 flex flex-col justify-between items-center max-h-[90vh] min-h-fit overflow-auto bg-slate-100 p-12 pt-6 pb-9 rounded-3xl m-auto inset-0 w-282.5">
-                <span onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
+            <div data-testid="thisiseditmodal" className="scrool fixed z-10 flex flex-col justify-between items-center max-h-[90vh] min-h-fit overflow-auto bg-slate-100 p-12 pt-6 pb-9 rounded-3xl m-auto inset-0 w-282.5">
+                <span data-testid="exit_editmodal" onClick={() =>{ setMadal(false);}} className="absolute top-8 right-8 p-2 rounded-full hover:bg-slate-200 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 0.685636 -0.727944 0.685636 2.55737 0.508789)" fill="#B9B9B9"/>
                         <rect width="41.3575" height="3.11651" rx="1.55825" transform="matrix(0.727944 -0.685636 0.727944 0.685636 0.00292969 28.5811)" fill="#B9B9B9"/>

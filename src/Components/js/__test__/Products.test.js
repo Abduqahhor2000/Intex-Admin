@@ -165,9 +165,22 @@ describe("Products", ()=>{
         render(<ProductsItem  item={products[0]}/>)
 
         const productEdit = screen.getByTestId("product_edit_62")
-        const productDel = screen.getByTestId("product_del_62")
+        await user.click(productEdit)
+        expect(screen.getByTestId("thisiseditmodal")).toBeInTheDocument();
+        const exit_editmodal = screen.getByTestId("exit_editmodal")
+        await user.click(exit_editmodal)
+        expect(screen.queryByTestId("thisiseditmodal")).not.toBeInTheDocument();
 
-        expect(productEdit).toBeInTheDocument()
-        expect(productDel).toBeInTheDocument()
+        const productDel = screen.getByTestId("product_del_62")
+        await user.click(productDel)
+        expect(screen.getByTestId("thisisdelmodal")).toBeInTheDocument();
+        const exit_delmodal = screen.getByTestId("exit_delmodal")
+        await user.click(exit_delmodal)
+        expect(screen.queryByTestId("thisiseditmodal")).not.toBeInTheDocument();    
+        
+        // expect(productDel).toBeInTheDocument()
+        // await user.click(productDel)
+        // expect(screen.getByTestId("thisiseditmodal")).toBeInTheDocument();
+
     })
 }) 
