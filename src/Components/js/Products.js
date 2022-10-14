@@ -1,55 +1,51 @@
 import { useEffect, useState } from "react";
-import ProductsTable from "./ProductsTable"
-import { useNavigate } from "react-router-dom"
-import { Triangle  } from  'react-loader-spinner'
+import ProductsTable from "./ProductsTable";
+import { useNavigate } from "react-router-dom";
+import { Triangle } from "react-loader-spinner";
 import { useSelector, useDispatch } from "react-redux";
 import AddProductMadal from "./madals/AddProductMadal";
 import { addAllCategories } from "../../redux/categoryReducer";
 import { getCategories } from "./fetching/getCategories";
-import { scrollOf } from "./function/scrollOf"
+import { scrollOf } from "./function/scrollOf";
 
 export default function Products() {
-    const token = useSelector(state => state.user.user.token)
-    const dispatch = useDispatch();
-    const categories = useSelector(state => state.user.category.categories)
-    const trueCategory = useSelector(state => state.user.category?.categories[0]?.category_id)
-    const [category_id, setCategory_id] = useState("");
-    const [madal, setMadal] = useState(false)
-    const [oneHand, setOneHand] = useState(false)
-    const navigate = useNavigate() 
-    
-    useEffect(()=>{
-        if((category_id === "") && trueCategory){
-            setCategory_id(trueCategory);    
-        }
-        getCategories(token, dispatch, addAllCategories, navigate)
-    }, [madal, token, dispatch, navigate, category_id, trueCategory])
+  const token = useSelector((state) => state.user.user.token);
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.user.category.categories);
+  const [category_id, setCategory_id] = useState(categories[0].category_id);
+  const [madal, setMadal] = useState(false);
+  const [oneHand, setOneHand] = useState(false);
+  const navigate = useNavigate();
 
-    useEffect(()=>{
-        scrollOf(madal)
-    }, [madal])
+  useEffect(() => {
+    getCategories(token, dispatch, addAllCategories, navigate);
+  }, [madal, token, dispatch, navigate, category_id]);
 
-    if(!categories.length){
-        return(
-            <div className="mx-auto w-80 mt-40">
-                <Triangle 
-                    height = "300"
-                    width = "300"
-                    radius = "9"
-                    color = '#009398'
-                    ariaLabel = 'three-dots-loading'     
-                    wrapperStyle
-                    wrapperClass
-                />
-            </div>
-        )
-    }
+  useEffect(() => {
+    scrollOf(madal);
+  }, [madal]);
 
+  if (!categories.length) {
     return (
-        <>
-            <div className="bg-lighter min-h-screen py-6">
-                <div className="flex justify-end px-10">
-                    {/* <div className="w-96 h-16 rounded-3xl bg-white flex shadow-lg items-center justify-between">
+      <div className="mx-auto w-80 mt-40">
+        <Triangle
+          height="300"
+          width="300"
+          radius="9"
+          color="#009398"
+          ariaLabel="three-dots-loading"
+          wrapperStyle
+          wrapperClass
+        />
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className="bg-lighter min-h-screen py-6">
+        <div className="flex justify-end px-10">
+          {/* <div className="w-96 h-16 rounded-3xl bg-white flex shadow-lg items-center justify-between">
                         <input className="w-64 h-16 text-xl text-black ml-9 placeholder:text-gray-777 border-none outline-none pb-0.5 leading-6" placeholder="Найти"/>
                         <span className="w-20 h-10 border-[#E6E6E6] px-6 py-2 block border-solid border-l-2">
                             <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,41 +53,63 @@ export default function Products() {
                             </svg>
                         </span>
                     </div> */}
-                    <div onClick={() => {setMadal(true)}} className="h-16 w-56 rounded-3xl pt-4 text-center text-xl font-middle text-white shadow-lg cursor-pointer bg-blue-green">
-                        + Добавить продукт
-                    </div>
-                </div>
+          <div
+            onClick={() => {
+              setMadal(true);
+            }}
+            className="h-16 w-56 rounded-3xl pt-4 text-center text-xl font-middle text-white shadow-lg cursor-pointer bg-blue-green"
+          >
+            + Добавить продукт
+          </div>
+        </div>
 
-                <div className="w-full overflow-x-auto pt-3">
-                    <div className="flex w-full justify-center items-center mb-10">
-                        {
-                            categories.map((item) => {
-                                return(
-                                    <span 
-                                        key={item.category_id} 
-                                        className={`min-w-40 duration-300 after:content-[''] after:block after:w-0 after:height-px after:border-b-4 after:border-solid after:border-transparent after:relative after:top-2 after:duration-500 after:left-24  cursor-pointer text-3xl ml-5 py-4 font-bold text-center ${(category_id === item.category_id) ? "text-blue-green cursor-text after:w-full after:border-blue-green after:left-0" : "text-gray-777"}`}
-                                        onClick={() => setCategory_id(item.category_id)}
-                                    >
-                                        {item.name_ru}
-                                    </span>
-                                )
-                            })
-                        }
-                    </div>
-                    {
-                        categories.map((item) => {
-                            return(
-                                <div className="w-full" key={item.category_id}>
-                                    {category_id === item.category_id ? <ProductsTable oneHand={oneHand} category_id={item.category_id} /> : null}
-                                </div>
-                            )
-                        })
-                    }
-                    {
-                        madal ? <AddProductMadal setOneHand={setOneHand} oneHand={oneHand} setMadal={setMadal} /> : null
-                    }
-                </div>
-            </div>
-        </>
-    )
+        <div className="w-full overflow-x-auto pt-3">
+          <div className="flex w-full justify-center items-center mb-10">
+            {categories.map((item) => {
+              return (
+                <span
+                  key={item.category_id}
+                  className={`min-w-40 duration-300 after:content-[''] after:block after:w-0 after:height-px after:border-b-4 after:border-solid after:border-transparent after:relative after:top-2 after:duration-500 after:left-24  cursor-pointer text-3xl ml-5 py-4 font-bold text-center ${
+                    category_id === item.category_id
+                      ? "text-blue-green cursor-text after:w-full after:border-blue-green after:left-0"
+                      : "text-gray-777"
+                  }`}
+                  onClick={() => setCategory_id(item.category_id)}
+                  data-testid={`category_${item.category_id}`}
+                >
+                  {item.name_ru}
+                </span>
+              );
+            })}
+          </div>
+          {categories.map((item) => {
+            if(category_id !== item.category_id){
+                return;
+            }
+            return (
+              <div
+                className="w-full"
+                key={item.category_id}
+                data-testid={`categoryTable_${item.category_id}`}
+              >
+                {category_id === item.category_id ? (
+                  <ProductsTable
+                    oneHand={oneHand}
+                    category_id={item.category_id}
+                  />
+                ) : null}
+              </div>
+            );
+          })}
+          {madal ? (
+            <AddProductMadal
+              setOneHand={setOneHand}
+              oneHand={oneHand}
+              setMadal={setMadal}
+            />
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
 }

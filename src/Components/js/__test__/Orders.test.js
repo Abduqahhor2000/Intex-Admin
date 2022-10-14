@@ -2,10 +2,7 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import * as reduxHooks from "react-redux"
 import Orders from "../Orders"
-import Sales from "../Sales"
 import userEvent from '@testing-library/user-event'
-import * as reactRouterDom from "react-router-dom"
-import {BrowserRouter} from 'react-router-dom'
 import '@testing-library/jest-dom'
 
 const orders = [
@@ -85,7 +82,6 @@ const consultations = [
         "status": false
     }
 ]
-// jest.spyOn(React, "useState").mockImplementation(()=> React.useState(["sales"]))
 
 jest.mock("react-redux")
 const mocked_useSelector = jest.spyOn(reduxHooks, "useSelector")
@@ -100,17 +96,13 @@ jest.mock('react-router-dom', () => {
         useLocation: jest.fn(),
     };
 });
-// const mocked_useLocation = jest.spyOn(reactRouterDom, "useLocation")
 
 describe("Orders", ()=>{
     const user = userEvent.setup()
 
     it("should find text", async ()=>{
         mocked_useSelector.mockReturnValue(orders)
-        // mocked_useSelector.mockReturnValue("sfhdfgjsdhfsdjhfvjsdfhjdsfvjhsdvfjhdsvhjfvsdhjv")
-        // mocked_useLocation.mockReturnValue({pathname: "/login"})
-        // mocked_useState.mockReturnValue("sales")
-        
+       
         render(<Orders />)
         expect(screen.getByText(/Изображение/i)).toBeInTheDocument()
         
@@ -126,7 +118,6 @@ describe("Orders", ()=>{
         expect(screen.getAllByTestId("sales_item")).toBeTruthy()
         
         await user.click(screen.getByTestId("delet_button"))
-        expect(screen.getByTestId("delet_modal")).toBeTruthy()
-        
+        expect(screen.getByTestId("delet_modal")).toBeTruthy()    
     })
 }) 

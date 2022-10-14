@@ -12,7 +12,7 @@ export default function ProductsTable({category_id, oneHand}) {
     const products = useSelector(state => state.user.product.products)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
+    
     const getProducts = async () => {
         try{
             const {data} = await https({
@@ -73,7 +73,7 @@ export default function ProductsTable({category_id, oneHand}) {
                 <tbody>
                     {
                         products.map(item => {
-                            if(item.category_id !== category_id){
+                            if(item.id !== category_id){
                                 return null;
                             }
                             return (
