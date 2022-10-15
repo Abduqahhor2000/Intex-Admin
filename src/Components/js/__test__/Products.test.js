@@ -177,10 +177,5 @@ describe("Products", ()=>{
         const exit_delmodal = screen.getByTestId("exit_delmodal")
         await user.click(exit_delmodal)
         expect(screen.queryByTestId("thisiseditmodal")).not.toBeInTheDocument();    
-        
-        // expect(productDel).toBeInTheDocument()
-        // await user.click(productDel)
-        // expect(screen.getByTestId("thisiseditmodal")).toBeInTheDocument();
-
     })
 }) 
