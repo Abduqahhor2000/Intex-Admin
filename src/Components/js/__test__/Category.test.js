@@ -2,7 +2,6 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import * as reduxHooks from "react-redux"
 import Category from "../Category"
-import ProductsItem from "../containers/ProductItem"
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
