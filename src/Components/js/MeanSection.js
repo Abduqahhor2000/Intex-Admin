@@ -33,8 +33,6 @@ export default function MeanSection() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // console.log(user, token)
-
   function start() {
     getConsultations(token, dispatch, addAllConsultations, navigate);
     getProducts(token, dispatch, addAllProducts, navigate);

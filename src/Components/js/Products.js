@@ -12,7 +12,7 @@ export default function Products() {
   const token = useSelector((state) => state.user.user.token);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.user.category.categories);
-  const [category_id, setCategory_id] = useState(categories[0].category_id);
+  const [category_id, setCategory_id] = useState("");
   const [madal, setMadal] = useState(false);
   const [oneHand, setOneHand] = useState(false);
   const navigate = useNavigate();
@@ -83,8 +83,9 @@ export default function Products() {
             })}
           </div>
           {categories.map((item) => {
-            if(category_id !== item.category_id){
-                return;
+            let iddo = category_id ?  : categories[0].category_id
+            if(iddo !== item.category_id){
+                return null;
             }
             return (
               <div

@@ -38,7 +38,6 @@ export default function Login() {
                     "password": password,
                 }
             )
-            console.log(data)
             dispatch(addUser(data))
         }catch(err){
             if(err.response.status === 404){

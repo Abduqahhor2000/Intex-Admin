@@ -12,6 +12,7 @@ export default function ProductsTable({category_id, oneHand}) {
     const products = useSelector(state => state.user.product.products)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
     
     const getProducts = async () => {
         try{
@@ -55,7 +56,7 @@ export default function ProductsTable({category_id, oneHand}) {
             </div>
         )
     }
-
+    
     return (
         <div className="w-full overflow-x-auto px-10">
             <table className="border-spacing-y-2 w-full border-separate">
@@ -73,7 +74,7 @@ export default function ProductsTable({category_id, oneHand}) {
                 <tbody>
                     {
                         products.map(item => {
-                            if(item.id !== category_id){
+                            if(item.category_id !== category_id){
                                 return null;
                             }
                             return (
