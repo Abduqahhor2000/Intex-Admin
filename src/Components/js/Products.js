@@ -83,7 +83,7 @@ export default function Products() {
             })}
           </div>
           {categories.map((item) => {
-            let iddo = category_id ?  : categories[0].category_id
+            let iddo = category_id ? category_id : categories[0].category_id
             if(iddo !== item.category_id){
                 return null;
             }
